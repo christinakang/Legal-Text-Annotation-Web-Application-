@@ -20,8 +20,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Multi select-->
-    <link href="multiselect.css" rel="stylesheet">
-
+    <!--<link href="multiselect.css" rel="stylesheet">-->
     <!-- Functions-->
     <script type="text/javascript" src="js/scenario.js"></script>
 </head>
@@ -112,11 +111,19 @@
                     <!-- Basic Card Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Scenario Select </h6>
+                        </div>
+                        <div class="card-header py-3">
+                            <select id="scenarioSelect" onchange="getScenario()" class="form-select" aria-label="Default select example">
+                                <option value="0" selected>Select scenario</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Scenario Text </h6>
                         </div>
                         <div class="card-body">
-                            <!--<p onmouseup="getSelectedText(); alert(txt)"><iframe src="scenario.txt" frameborder="0" height="100%"
-                                width="95%"></iframe></p>-->
                             <p id="ScenarioText" onmouseup="getSelectedText(); alert(txt)"></p>
                         </div>
                     </div>
@@ -195,6 +202,6 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <!--- Multi-slect -->
-    <script src="multiselect.min.js"></script>
+    <!--<script src="multiselect.min.js"></script>-->
 </body>
 </html>
