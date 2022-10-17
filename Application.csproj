@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\legalConcept.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\.browserslistrc" />
     <None Include="wwwroot\css\sb-admin-2.css" />
     <None Include="wwwroot\css\sb-admin-2.min.css" />
@@ -22,7 +26,8 @@
     <None Include="wwwroot\js\demo\chart-bar-demo.js" />
     <None Include="wwwroot\js\demo\chart-pie-demo.js" />
     <None Include="wwwroot\js\demo\datatables-demo.js" />
-    <None Include="wwwroot\js\functions.js" />
+    <None Include="wwwroot\js\legalConcept.js" />
+    <None Include="wwwroot\js\scenario.js" />
     <None Include="wwwroot\js\sb-admin-2.js" />
     <None Include="wwwroot\js\sb-admin-2.min.js" />
     <None Include="wwwroot\LegalConcept.html" />

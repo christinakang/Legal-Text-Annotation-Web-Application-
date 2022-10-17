@@ -4,6 +4,8 @@
     {
         public int Id { get; set; }
 
+        public string? Name { get; set; }
+
         public string? RelatedTopic { get; set; }
 
         public string? RelatedSection { get; set; }

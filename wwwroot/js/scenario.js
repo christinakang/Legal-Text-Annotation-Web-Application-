@@ -1,8 +1,13 @@
 const legalConceptUri = 'api/legalconcepts';
 const scenariosUri = 'api/scenarios';
 
-// function to get scenario based on id.
+// function that runs all necessary initial retrieval.
+function init() {
+    // Get the first id scenerio from db.
+    getScenario(1);
+}
 
+// get scenario based on id.
 function getScenario(id) {
     fetch(`${scenariosUri}/${id}`)
         .then(response => response.json())
@@ -10,11 +15,13 @@ function getScenario(id) {
         .catch(error => console.error('Unable to get scenario ${id}', error));
 }
 
+// Change the scenario text based on retrieved scenario text from db.
 function changeScenarioText(data) {
     var element = document.getElementById("ScenarioText");
     element.innerHTML = data.text;
 }
 
+// Default add scenario logic.
 function addScenario() {
     const addNameTextbox = document.getElementById('add-name');
 
@@ -39,6 +46,7 @@ function addScenario() {
         .catch(error => console.error('Unable to add item.', error));
 }
 
+// Default delte scneario logic.
 function deleteItem(id) {
     fetch(`${uri}/${id}`, {
         method: 'DELETE'
