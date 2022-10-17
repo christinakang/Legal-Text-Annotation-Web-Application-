@@ -1,5 +1,4 @@
 const legalConceptUri = 'api/legalconcepts';
-const scenariosUri = 'api/scenarios';
 
 // function that runs all necessary initial retrieval.
 
@@ -33,6 +32,43 @@ function displayLegalConcepts(legalConcepts) {
                 '<td>' + '<button onclick="deleteLegalConcept(' + value.id + ')"> Delete </button>' + '</td>\n' +
                 '</tr>');
     });
+}
+
+// Function to add new legal concept.
+function addLegalConcept() {
+    const nameInput = document.getElementById('nameInput');
+    const relatedTopicInput = document.getElementById('relatedTopicInput');
+    const relatedSectionInput = document.getElementById('relatedSectionInput');
+    const otherInput = document.getElementById('otherInput');
+
+    const legalConceptObj = {
+        /*isComplete: false,*/
+        name: nameInput.value.trim(),
+        relatedTopic: relatedTopicInput.value.trim(),
+        relatedSection: relatedSectionInput.value.trim(),
+        other: otherInput.value.trim(),
+    };
+
+    fetch(legalConceptUri, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(legalConceptObj)
+    })
+        .then(response => response.json())
+        .then(() => {
+            getLegalConcepts();
+
+            // Reset input fields.
+
+            nameInput.value = null;
+            relatedTopicInput.value = null;
+            relatedSectionInput.value = null;
+            otherInput.value = null;
+        })
+        .catch(error => console.error('Unable to create legal concept.', error));
 }
 
 // delete legal concept from database.

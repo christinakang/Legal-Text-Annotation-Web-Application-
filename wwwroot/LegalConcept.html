@@ -126,6 +126,47 @@
                             </thead>
                         </table>
                     </div>
+
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createLegalConceptModal">Add Legal Concept <i class="fas fa-plus"></i></button>
+
+                    <!-- Modal -->
+                    <div id="createLegalConceptModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title"><b>Add legal concept</b></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="md-form">
+                                        <input type="text" id="nameInput" class="form-control validate">
+                                        <label>Name</label>
+                                    </div>
+
+                                    <div class="md-form">
+                                        <input type="email" id="relatedTopicInput" class="form-control validate">
+                                        <label>Related topic</label>
+                                    </div>
+
+                                    <div class="md-form">
+                                        <input type="email" id="relatedSectionInput" class="form-control validate">
+                                        <label>Related section</label>
+                                    </div>
+
+                                    <div class="md-form">
+                                        <input type="email" id="otherInput" class="form-control validate">
+                                        <label>Other</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" onclick="addLegalConcept()" data-dismiss="modal">Create</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
