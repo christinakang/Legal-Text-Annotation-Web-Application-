@@ -47,6 +47,37 @@ namespace Application.Controllers
             return CreatedAtAction("GetLegalConcept", new { id = legalConcept.Id }, legalConcept);
         }
 
+        // PUT: api/legalconcepts/{id}
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutLegalConcept(int id, LegalConcept legalConcept)
+        {
+            if (id != legalConcept.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(legalConcept).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!LegalConceptExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // DELETE: api/legalconcepts/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLegalConcept(int id)
@@ -61,6 +92,12 @@ namespace Application.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        // Private function to check if target legal concept exists.
+        private bool LegalConceptExists(int id)
+        {
+            return _context.LegalConcepts.Any(e => e.Id == id);
         }
     }
 }

@@ -46,7 +46,7 @@ function addScenario() {
         .catch(error => console.error('Unable to add item.', error));
 }
 
-// Default delte scneario logic.
+// Default delete scneario logic.
 function deleteItem(id) {
     fetch(`${uri}/${id}`, {
         method: 'DELETE'

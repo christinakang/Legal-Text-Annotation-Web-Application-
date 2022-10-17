@@ -130,7 +130,7 @@
                     <!-- Trigger the modal with a button -->
                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createLegalConceptModal">Add Legal Concept <i class="fas fa-plus"></i></button>
 
-                    <!-- Modal -->
+                    <!-- Create Modal -->
                     <div id="createLegalConceptModal" class="modal fade" role="dialog">
                         <div class="modal-dialog">
 
@@ -141,27 +141,69 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="md-form">
-                                        <input type="text" id="nameInput" class="form-control validate">
                                         <label>Name</label>
+                                        <input type="text" id="nameInput" class="form-control validate">
                                     </div>
 
                                     <div class="md-form">
-                                        <input type="email" id="relatedTopicInput" class="form-control validate">
                                         <label>Related topic</label>
+                                        <input type="text" id="relatedTopicInput" class="form-control validate">
                                     </div>
 
                                     <div class="md-form">
-                                        <input type="email" id="relatedSectionInput" class="form-control validate">
                                         <label>Related section</label>
+                                        <input type="text" id="relatedSectionInput" class="form-control validate">
                                     </div>
 
                                     <div class="md-form">
-                                        <input type="email" id="otherInput" class="form-control validate">
                                         <label>Other</label>
+                                        <input type="text" id="otherInput" class="form-control validate">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-success" onclick="addLegalConcept()" data-dismiss="modal">Create</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Update Modal -->
+                    <div id="updateLegalConceptModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title"><b>Update legal concept</b></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="md-form">
+                                        <label>Id</label>
+                                        <input type="text" id="idInputUpdate" class="form-control validate" disabled>
+                                    </div>
+                                    <div class="md-form">
+                                        <label>Name</label>
+                                        <input type="text" id="nameInputUpdate" class="form-control validate">
+                                    </div>
+
+                                    <div class="md-form">
+                                        <label>Related topic</label>
+                                        <input type="text" id="relatedTopicInputUpdate" class="form-control validate">
+                                    </div>
+
+                                    <div class="md-form">
+                                        <label>Related section</label>
+                                        <input type="text" id="relatedSectionInputUpdate" class="form-control validate">
+                                    </div>
+
+                                    <div class="md-form">
+                                        <label>Other</label>
+                                        <input type="text" id="otherInputUpdate" class="form-control validate">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" onclick="updateLegalConcept()" data-dismiss="modal">Update</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
