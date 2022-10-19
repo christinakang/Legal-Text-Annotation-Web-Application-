@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.Migrations
 {
     [DbContext(typeof(DAPContext))]
-    [Migration("20221017054748_AddNameToLegalConcepts")]
-    partial class AddNameToLegalConcepts
+    [Migration("20221019082511_IntialCreate")]
+    partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
