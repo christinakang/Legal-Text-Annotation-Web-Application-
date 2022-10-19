@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\legalConcept.js" />
+    <Content Remove="wwwroot\scenario2.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +22,7 @@
     <None Include="wwwroot\img\undraw_profile_2.svg" />
     <None Include="wwwroot\img\undraw_profile_3.svg" />
     <None Include="wwwroot\img\undraw_rocket.svg" />
-    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\scenario2.html" />
     <None Include="wwwroot\js\demo\chart-area-demo.js" />
     <None Include="wwwroot\js\demo\chart-bar-demo.js" />
     <None Include="wwwroot\js\demo\chart-pie-demo.js" />
@@ -33,6 +34,12 @@
     <None Include="wwwroot\LegalConcept.html" />
     <None Include="wwwroot\legalconcept.txt" />
     <None Include="wwwroot\multiselect.min.js" />
+    <None Include="wwwroot\recogito-polyfills.js" />
+    <None Include="wwwroot\recogito.min.css" />
+    <None Include="wwwroot\recogito.min.css.map" />
+    <None Include="wwwroot\recogito.min.js" />
+    <None Include="wwwroot\recogito.min.js.LICENSE.txt" />
+    <None Include="wwwroot\recogito.min.js.map" />
     <None Include="wwwroot\sample.csv" />
     <None Include="wwwroot\scenario.html" />
     <None Include="wwwroot\scenario.txt" />
