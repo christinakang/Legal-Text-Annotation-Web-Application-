@@ -9,7 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scenario</title>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,14 +28,12 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/recogito.min.css" rel="stylesheet">
 
-
-    <!-- Multi select-->
-    <!--<link href="multiselect.css" rel="stylesheet">-->
     <!-- Functions-->
     <script type="text/javascript" src="js/scenario.js"></script>
+    <script type="text/javascript" src="js/recogito.min.js"></script>
+
+    <title>Scenario</title>
 </head>
-
-
 
 <body id="page-top" onload=init()>
 
@@ -175,7 +181,7 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Scenario Select </h6>
                         </div>
-                       
+
                         <div class="card-header py-3">
                             <select id="scenarioSelect" onchange="getScenario()" class="form-select" aria-label="Default select example">
                                 <option value="0" selected>Select scenario</option>
@@ -185,20 +191,18 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div>
-                                <button id="add-annotation">Add Annotation</button>
-                                <button id="update-annotation">Update Annotation</button>
-                                <button id="remove-annotation">Remove Annotation</button>
-                                <button id="select-annotation">Select Annotation</button>
                                 <button id="toggle-mode">MODE: ANNOTATION</button>
                             </div>
                             <h6 class="m-0 font-weight-bold text-primary">Scenario Text </h6>
                         </div>
 
                         <div class="card-body">
-                            <p id="ScenarioText" onmouseup="getSelectedText(); alert(txt)"></p>
+                            <div id="ScenarioContent" class="plaintext" style="margin-top: 1em; margin-bottom: 1em;">
+                                <br />
+                                <p id="ScenarioText"></p>
+                                <br />
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="card">
@@ -264,18 +268,37 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!--- Multi-slect -->
-    <!--<script src="multiselect.min.js"></script>-->
 </body>
 </html>
+
+<script type="text/javascript">
+
+    // Intialize Recogito
+    var r = Recogito.init({
+        content: 'ScenarioContent', // Element id or DOM node to attach to
+        locale: 'auto',
+        allowEmpty: true,
+        widgets: [
+            { widget: 'COMMENT' },
+            { widget: 'TAG', vocabulary: ['Place', 'Person', 'Event', 'Organization', 'Animal'] }
+        ],
+        relationVocabulary: ['isRelated', 'isPartOf', 'isSameAs ']
+    });
+
+    // Switch annotation mode (annotation/relationships)
+
+    var annotationMode = 'ANNOTATION'; // or 'RELATIONS'
+
+    var toggleModeBtn = document.getElementById('toggle-mode');
+    toggleModeBtn.addEventListener('click', function () {
+        if (annotationMode === 'ANNOTATION') {
+            toggleModeBtn.innerHTML = 'MODE: RELATIONS';
+            annotationMode = 'RELATIONS';
+        } else {
+            toggleModeBtn.innerHTML = 'MODE: ANNOTATION';
+            annotationMode = 'ANNOTATION';
+        }
+
+        r.setMode(annotationMode);
+    });
+</script>
