@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+
+<html>
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,9 +25,9 @@
     <!--<link href="multiselect.css" rel="stylesheet">-->
     <!-- Functions-->
     <script type="text/javascript" src="js/scenario.js"></script>
-
-    <script src="js/recogito.min.js"></script>
 </head>
+
+
 
 <body id="page-top" onload=init()>
 
@@ -105,6 +105,64 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <img class="img-profile rounded-circle"
+                                     src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
@@ -135,67 +193,71 @@
                             </div>
                             <h6 class="m-0 font-weight-bold text-primary">Scenario Text </h6>
                         </div>
+
                         <div class="card-body">
-                            <p id="ScenarioText"></p>
+                            <p id="ScenarioText" onmouseup="getSelectedText(); alert(txt)"></p>
                         </div>
+
+
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">IRAC Analysis</h5>
-                            <!-- General Form Elements -->
-                            <form>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Issues</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <label>Select Related sections </label>
-                                <select id='testSelect1' multiple>
-                                    <option value='1'>Section 2</option>
-                                    <option value='2'>Section 3</option>
-                                    <option value='3'>Section 4</option>
-                                    <option value='4'>Section 5</option>
-                                    <option value='5'>Section 6</option>
-                                </select>
-
-                                <div class="row mb-3">
-                                    <label for="inputText2" class="col-sm-2 col-form-label">Related court case</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-floating mb-3">
-                                    <label for="floatingTextarea">Analysis</label>
-                                    <textarea class="form-control" placeholder="Analysis here" id="floatingTextarea" style="height: 100px;"></textarea>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label for="inputText3" class="col-sm-2 col-form-label">Conclusion</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Submit Button</label>
-                                    <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- /.container-fluid -->
-                        <div class="col-sm-10">
-                            <button class="btn btn-success btn-icon-split">ADD IRAC</button>
-                        </div>
-                    </div>
-                    <!-- End of Main Content -->
                 </div>
-                <!-- End of Content Wrapper -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">IRAC Analysis</h5>
+                        <!-- General Form Elements -->
+                        <form>
+                            <div class="row mb-3">
+                                <label for="inputText" class="col-sm-2 col-form-label">Issues</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <label>Select Related sections </label>
+                            <select id='testSelect1' multiple>
+                                <option value='1'>Section 2</option>
+                                <option value='2'>Section 3</option>
+                                <option value='3'>Section 4</option>
+                                <option value='4'>Section 5</option>
+                                <option value='5'>Section 6</option>
+                            </select>
+
+                            <div class="row mb-3">
+                                <label for="inputText2" class="col-sm-2 col-form-label">Related court case</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <label for="floatingTextarea">Analysis</label>
+                                <textarea class="form-control" placeholder="Analysis here" id="floatingTextarea" style="height: 100px;"></textarea>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="inputText3" class="col-sm-2 col-form-label">Conclusion</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Submit Button</label>
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.container-fluid -->
+                    <div class="col-sm-10">
+                        <button class="btn btn-success btn-icon-split">ADD IRAC</button>
+                    </div>
+                </div>
+                <!-- End of Main Content -->
             </div>
+            <!-- End of Content Wrapper -->
         </div>
+    </div>
     </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
@@ -215,12 +277,5 @@
 
     <!--- Multi-slect -->
     <!--<script src="multiselect.min.js"></script>-->
-
-
-
-    
-
-
-   
 </body>
 </html>
