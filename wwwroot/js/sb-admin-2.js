@@ -61,11 +61,13 @@ function validate() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     if (username == "admin" && password == "admin") {
-        alert("Login success fully");
         localStorage.setItem('username', username);
         window.location = "index.html"; // Redirecting to other page.
         return false;
+    } else {
+        alert("wrong username or password");
     }
+    
 }
 
 
