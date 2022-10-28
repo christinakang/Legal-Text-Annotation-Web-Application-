@@ -32,6 +32,7 @@
     <script type="text/javascript" src="js/scenario.js"></script>
     <script type="text/javascript" src="js/recogito.min.js"></script>
 
+
     <title>Scenario</title>
 </head>
 
@@ -45,9 +46,9 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
+                <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
-                    </div>
+                </div>
                 <div class="sidebar-brand-text mx-3">Legal Text Annotation</div>
             </a>
 
@@ -181,8 +182,16 @@
                                 <option value='5'>Section 6</option>
                             </select>
 
+
                             <div class="row mb-3">
                                 <label for="inputText2" class="col-sm-2 col-form-label">Related court case</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="inputText2" class="col-sm-2 col-form-label">Paragraph Number or Page number of the court case</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control">
                                 </div>
@@ -260,9 +269,16 @@
 </script>
 
 <script>
-        function displayUser() {
-            var inputTest = localStorage['username'];
-            /*alert('Inserted Data ' + localStorage['username']);*/
-            document.getElementById('userDisplay').innerHTML = inputTest;
-        }
-    </script>
+    function displayUser() {
+        var inputTest = localStorage['username'];
+        /*alert('Inserted Data ' + localStorage['username']);*/
+        document.getElementById('userDisplay').innerHTML = inputTest;
+    }
+</script>
+
+
+
+
+
+
+
