@@ -26,7 +26,7 @@
     <script type="text/javascript" src="js/legalConcept.js"></script>
 </head>
 
-<body id="page-top" onload="init()">
+<body id="page-top" onload=init(),displayUser()>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -39,7 +39,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Legal Text Annotation</div>
             </a>
 
             <!-- Divider -->
@@ -90,22 +90,7 @@
 
             <!-- Page Heading -->
             <h1 class="h3 mb-2 text-gray-800">Legal Concept</h1>
-            <p class="mb-4">Legal concept description </p>
-            <h1><?php echo "Hello World" ?></h1>
             <div class="card shadow mb-4">
-
-                <?php
-
-                // To Reac CSV File
-                $csvfile = 'sample.csv';
-                $file_handle = fopen($csvfile, 'r');
-                while(!feof($file_handle))
-                {
-                echo fgetcsv($file_handle, 1024);
-                }
-                fclose($file_handle);
-                ?>
-            </div>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
@@ -243,3 +228,11 @@
     <script src="js/demo/datatables-demo.js"></script>
 </body>
 </html>
+
+<script>
+    function displayUser() {
+        var inputTest = localStorage['username'];
+        /*alert('Inserted Data ' + localStorage['username']);*/
+        document.getElementById('userDisplay').innerHTML = inputTest;
+    }
+</script>
