@@ -273,6 +273,21 @@
 
 <script type="text/javascript">
 
+    //// Get legal concepts.
+
+    const legalConceptList = [];
+
+    fetch(legalConceptUri)
+        .then(response => response.json())
+        .then(data => {
+            // Store legal concepts in legalConceptList.
+
+            $.each(data, function (index, value) {
+                legalConceptList.push(value.name);
+            });
+        })
+        .catch(error => console.error('Unable to get legal concepts', error));
+
     // Intialize Recogito
     var r = Recogito.init({
         content: 'ScenarioContent', // Element id or DOM node to attach to
@@ -280,7 +295,7 @@
         allowEmpty: true,
         widgets: [
             { widget: 'COMMENT' },
-            { widget: 'TAG', vocabulary: ['Place', 'Person', 'Event', 'Organization', 'Animal'] }
+            { widget: 'TAG', vocabulary: legalConceptList /*Set selectable vocabulary as legalConceptList.*/}
         ],
         relationVocabulary: ['isRelated', 'isPartOf', 'isSameAs ']
     });
