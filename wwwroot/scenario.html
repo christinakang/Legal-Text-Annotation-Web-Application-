@@ -210,50 +210,82 @@
                         <h5 class="card-title">IRAC Analysis</h5>
                         <!-- General Form Elements -->
                         <form>
-                            <div class="row mb-3">
+                            <div class="row">
                                 <label for="inputText" class="col-sm-2 col-form-label">Issues</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control">
                                 </div>
                             </div>
-                            <label>Select Related sections </label>
-                            <select id='testSelect1' multiple>
-                                <option value='1'>Section 2</option>
-                                <option value='2'>Section 3</option>
-                                <option value='3'>Section 4</option>
-                                <option value='4'>Section 5</option>
-                                <option value='5'>Section 6</option>
-                            </select>
+                            <br />
 
-                            <div class="row mb-3">
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Select Related sections </label>
+                                <select class="col-sm-2" id='testSelect1' multiple>
+                                    <option value='1'>Section 2</option>
+                                    <option value='2'>Section 3</option>
+                                    <option value='3'>Section 4</option>
+                                    <option value='4'>Section 5</option>
+                                    <option value='5'>Section 6</option>
+                                </select>
+                            </div>
+                            <br />
+
+                            <div class="row">
                                 <label for="inputText2" class="col-sm-2 col-form-label">Related court case</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control">
                                 </div>
                             </div>
+                            <br />
 
-                            <div class="form-floating mb-3">
-                                <label for="floatingTextarea">Analysis</label>
-                                <textarea class="form-control" placeholder="Analysis here" id="floatingTextarea" style="height: 100px;"></textarea>
+                            <div class="row">
+                                <label class="col-sm-12 col-form-label">Annotation Buttons</label>
+                                <div class="col-sm-12 alert alert-primary" role="alert">
+                                    Annotation buttons will appear after highlighting the texts in the scenario above.<br />
+                                    Clicking on these buttons will add the annotation button text at start of the cursor in the analysis text box.<br />
+                                    If there is no cursor it will append to the end of the text. <br />
+                                </div>
+                                <div class="col-sm-12 m-1" id="annotationBtns">
+                                </div>
                             </div>
+                            <br />
 
-                            <div class="row mb-3">
+                            <div class="row">
+                                <label class="col-sm-12 col-form-label">Relation Buttons</label>
+                                <div class="col-sm-12 alert alert-primary" role="alert">
+                                    Clicking on these buttons will add the relationship text at start of the cursor in the analysis text box.<br />
+                                    If there is no cursor it will append to the end of the text.<br />
+                                </div>
+                                <div class="col-sm-12" id="relationBtns">
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="form-floating">
+                                <label for="analysisTextArea">Analysis</label>
+                                <textarea class="form-control" placeholder="Analysis here" id="analysisTextArea" style="height: 100px;"></textarea>
+                            </div>
+                            <br />
+
+                            <div class="row">
                                 <label for="inputText3" class="col-sm-2 col-form-label">Conclusion</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control">
                                 </div>
                             </div>
+                            <br />
 
-                            <div class="row mb-3">
+                            <div class="row">
                                 <label class="col-sm-2 col-form-label">Submit Button</label>
                                 <div class="col-sm-10">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
+                            <br />
                         </form>
                     </div>
                     <!-- /.container-fluid -->
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <button class="btn btn-success btn-icon-split">ADD IRAC</button>
                     </div>
                 </div>
@@ -261,7 +293,6 @@
             </div>
             <!-- End of Content Wrapper -->
         </div>
-    </div>
     </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
@@ -273,7 +304,7 @@
 
 <script type="text/javascript">
 
-    //// Get legal concepts.
+    // Get legal concepts.
 
     const legalConceptList = [];
 
@@ -288,21 +319,22 @@
         })
         .catch(error => console.error('Unable to get legal concepts', error));
 
-    // Intialize Recogito
+    // Intialize Recogito.
+
     var r = Recogito.init({
-        content: 'ScenarioContent', // Element id or DOM node to attach to
+        content: 'ScenarioContent', // Element id or DOM node to attach to.
         locale: 'auto',
         allowEmpty: true,
         widgets: [
-            { widget: 'COMMENT' },
-            { widget: 'TAG', vocabulary: legalConceptList /*Set selectable vocabulary as legalConceptList.*/}
+            /*            { widget: 'COMMENT' },*/ // Disabled comment since not used?
+            { widget: 'TAG', vocabulary: legalConceptList /*Set selectable vocabulary as legalConceptList.*/ }
         ],
         relationVocabulary: ['isRelated', 'isPartOf', 'isSameAs ']
     });
 
-    // Switch annotation mode (annotation/relationships)
+    // Switch annotation mode (annotation/relationships).
 
-    var annotationMode = 'ANNOTATION'; // or 'RELATIONS'
+    var annotationMode = 'ANNOTATION'; // or 'RELATIONS'.
 
     var toggleModeBtn = document.getElementById('toggle-mode');
     toggleModeBtn.addEventListener('click', function () {
@@ -315,5 +347,54 @@
         }
 
         r.setMode(annotationMode);
+    });
+
+    // Function that detectes a newly created annotation.
+
+    r.on('createAnnotation', function (annotation) {
+        // Log highlighted text as new annotation for debugging purposes.
+        console.log('created', annotation);
+        console.log('test retrieved value: ', annotation.target.selector[0].exact);
+
+        // On created annotation add a button with selected text for IRAC Analysis processing.
+        var selectedAnnotationText = annotation.target.selector[0].exact;
+
+        var annotationBtnDiv = document.getElementById('annotationBtns');
+
+        // Create button element.
+        var button = document.createElement('button');
+
+        button.type = 'button';
+
+        // Id will be the selectedAnnotationText + 'Btn'.
+        // Ex.Selected legal => The button id is 'legalBtn'.
+        // It is case senstive and also will take in spaces.
+        button.id = selectedAnnotationText + 'Btn';
+
+        // Add text to be displayed on button.
+        button.innerHTML = selectedAnnotationText;
+
+        // Add onClick event to add the selected annotation to analysis text area at the cursor.
+        button.addEventListener('click', function (event) {
+            console.log(button.innerHTML);
+
+            // Get current position of cursor at analysis text area.
+            // If no cursor, it will append at the end of the textArea's text.
+            var analysisTxtBox = document.getElementById('analysisTextArea');
+            let curPos = analysisTxtBox.selectionStart;
+
+            // Get current text in analysisTextArea.
+            var analysisTextAreaValue = $('#analysisTextArea').val();
+
+            // Insert text at cursor position.
+            $('#analysisTextArea').val(
+                analysisTextAreaValue.slice(0, curPos) + selectedAnnotationText + analysisTextAreaValue.slice(curPos));
+
+            // Restore cursor position to end of analysis text area after clicking on button.
+            analysisTextArea.focus();
+        });
+
+        // Append the  button to annotation div.
+        annotationBtnDiv.appendChild(button);
     });
 </script>
