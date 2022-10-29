@@ -25,6 +25,7 @@ function displayLegalConcepts(legalConcepts) {
     $.each(legalConcepts, function (index, value) {
         table.innerHTML +=
             ('<tr>\n' +
+                '<td>' + value.id + '</td>\n' +
                 '<td>' + value.name + '</td>\n' +
                 '<td>' + value.relatedTopic + '</td>\n' +
                 '<td>' + value.relatedSection + '</td>\n' +
