@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\legalConcept.js" />
+    <Content Remove="wwwroot\review.html" />
     <Content Remove="wwwroot\scenario2.html" />
   </ItemGroup>
 
@@ -31,30 +32,7 @@
     <None Include="wwwroot\js\sb-admin-2.js" />
     <None Include="wwwroot\js\sb-admin-2.min.js" />
     <None Include="wwwroot\LegalConcept.html" />
-    <None Include="wwwroot\recogito.min.css" />
-    <None Include="wwwroot\recogito.min.css.map" />
-    <None Include="wwwroot\recogito.min.js" />
-    <None Include="wwwroot\recogito.min.js.LICENSE.txt" />
-    <None Include="wwwroot\recogito.min.js.map" />
-    <None Include="wwwroot\sample.csv" />
-    <None Include="wwwroot\recogito.min.css" />
-    <None Include="wwwroot\recogito.min.css.map" />
-    <None Include="wwwroot\recogito.min.js" />
-    <None Include="wwwroot\recogito.min.js.LICENSE.txt" />
-    <None Include="wwwroot\recogito.min.js.map" />
-    <None Include="wwwroot\sample.csv" />
-    <None Include="wwwroot\recogito.min.css" />
-    <None Include="wwwroot\recogito.min.css.map" />
-    <None Include="wwwroot\recogito.min.js" />
-    <None Include="wwwroot\recogito.min.js.LICENSE.txt" />
-    <None Include="wwwroot\recogito.min.js.map" />
-    <None Include="wwwroot\sample.csv" />
-    <None Include="wwwroot\recogito.min.css" />
-    <None Include="wwwroot\recogito.min.css.map" />
-    <None Include="wwwroot\recogito.min.js" />
-    <None Include="wwwroot\recogito.min.js.LICENSE.txt" />
-    <None Include="wwwroot\recogito.min.js.map" />
-    <None Include="wwwroot\sample.csv" />
+    <None Include="wwwroot\review.html" />
     <None Include="wwwroot\scenario.html" />
     <None Include="wwwroot\scss\navs\_global.scss" />
     <None Include="wwwroot\scss\navs\_sidebar.scss" />
