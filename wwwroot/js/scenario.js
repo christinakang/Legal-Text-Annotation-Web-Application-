@@ -176,8 +176,11 @@ function saveFile() {
 
 
 
-  function displayUser() {
+    function displayUser() {
         var inputTest = localStorage['username'];
-        /*alert('Inserted Data ' + localStorage['username']);*/
-        document.getElementById('userDisplay').innerHTML = inputTest;
+    /*alert('Inserted Data ' + localStorage['username']);*/
+    console.log('User name : ', inputTest)
+    document.getElementById('userDisplay').innerHTML = inputTest;
     }
+
+
