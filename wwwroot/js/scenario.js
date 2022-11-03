@@ -3,6 +3,7 @@ const scenariosUri = 'api/scenarios';
 
 var scenarioList = null;
 
+
 // function that runs all necessary initial retrieval.
 function init() {
     // Get the first id scenerio from db.
@@ -82,7 +83,9 @@ function createRelationButtons() {
 
     // Id, value array. To be replaced with actual table data.
     const relationData = [
-        { name: 'IfElse', text: 'If ..... Else ....' }];
+        { name: ' If Else ', text: 'If ..... Else ....' },
+        { name: ' If Then ', text: 'If ..... Then ....' }
+    ];
 
     // Get relation btn div id.
     var relationBtnDiv = document.getElementById('relationBtns');
@@ -123,3 +126,58 @@ function createRelationButtons() {
         relationBtnDiv.appendChild(button);
     });
 }
+
+
+function saveFile() {
+
+    // Get the data from each element on the form.
+    var selectText_Tags = selectedAnnotation;
+    var Username = document.getElementById('userDisplay');
+    var scenarioID = document.getElementById('scenarioSelect');
+    var issues = document.getElementById('issues');
+    var sections = document.getElementById('selectedSections');
+    var relatedCourtCase = document.getElementById('relatedCourtCase');
+    var courtCaseNum = document.getElementById('courtCase_Num');
+    var analysis = document.getElementById('analysisTextArea');
+    var conclusion = document.getElementById('conclusion');
+
+    // This variable stores all the data.
+    var data =
+        '\r User: ' + Username.value + ' \r\n ' +
+        'Scenario Id: ' + scenarioID.value + ' \r\n ' +
+        'Selected Text & tag: ' + JSON.stringify(selectText_Tags) + ' \r\n ' +
+        'Issues: ' + issues.value + ' \r\n ' +
+        'sections: ' + sections.value + ' \r\n '+
+        'Related Court Case: ' + relatedCourtCase.value + ' \r\n ' +
+        'Court case page/paragraph num: ' + courtCaseNum.value + ' \r\n ' +
+        'Analysis : ' + analysis.value + ' \r\n ' +
+        'Conclustion: ' + conclusion.value + ' \r\n '
+        ;
+  
+    console.log(data)
+    var currentdate = new Date();
+    var date = currentdate.getDate() + "_" + (currentdate.getMonth() + 1) +"_"+
+        currentdate.getHours() + currentdate.getMinutes();
+    var filename = 'Annotated_'+scenarioID.value+'_'+date+'.txt'
+
+    
+    let blob = new Blob([data]);
+    let url = URL.createObjectURL(blob);
+    let file = document.createElement(`a`);
+    file.download = filename;
+    file.href = url;
+    document.body.appendChild(file);
+    file.click();
+    file.remove();
+    URL.revokeObjectURL(url);
+ 
+}
+
+
+
+
+  function displayUser() {
+        var inputTest = localStorage['username'];
+        /*alert('Inserted Data ' + localStorage['username']);*/
+        document.getElementById('userDisplay').innerHTML = inputTest;
+    }

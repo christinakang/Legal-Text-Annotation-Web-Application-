@@ -37,10 +37,19 @@
     <script type="text/javascript" src="js/scenario.js"></script>
     <script type="text/javascript" src="js/recogito.min.js"></script>
 
+    <!-- Multiselect Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <!-- Include the plugin's CSS and JS: -->
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
+
     <title>Scenario</title>
 </head>
 
-<body id="page-top" onload=init(),displayUser()>
+<body id="page-top" onload= displayUser()>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -176,67 +185,76 @@
                         <!-- General Form Elements -->
                         <form>
                             <div class="row">
-                                <label for="inputText" class="col-sm-2 col-form-label">Issues</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                <label for="inputText" class="col-sm-3 col-form-label">Issues</label>
+                                <div class="col-sm-8">
+                                    <input id="issues" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+
+
+
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Select Related sections </label>
+                                <div class="col-sm-8">
+                                    <select id="selectedSections" multiple="multiple">
+                                        <optgroup label="Section 2">
+                                            <option value="1-1">Section 2.1</option>
+                                            <option value="1-2">Section 2.2</option>
+                                            <option value="1-3">Section 2.3</option>
+                                        </optgroup>
+                                        <optgroup label="Section 3">
+                                            <option value="2-1">Section 3.1</option>
+                                            <option value="2-2">Section 3.2</option>
+                                            <option value="2-3">Section 3.3</option>
+                                        </optgroup>
+                                    </select>
                                 </div>
                             </div>
                             <br />
 
                             <div class="row">
-                                <label class="col-sm-2 col-form-label">Select Related sections </label>
-                                <select class="col-sm-10" id="sectionMultiSelect" multiple="multiple">
-                                    <option value="1">Section 1</option>
-                                    <option value="2">Section 2</option>
-                                    <option value="3">Section 3</option>
-                                    <option value="4">Section 4</option>
-                                    <option value="5">Section 5</option>
-                                    <option value="6">Section 6</option>
-                                </select>
-                            </div>
-                            <br />
-
-                            <div class="row mb-3">
                                 <div class="col-sm-6">
-                                    <label for="inputText2" class="col-sm-6 col-form-label">Related court case</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control">
+                                    <label for="inputText2" class="col-sm-36 col-form-label">Related court case</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="relatedCourtCase">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="inputText2" class="col-sm-6 col-form-label">Paragraph Number or Page number of the court case</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control">
+                                    <label for="inputText2" class="col-sm-10 col-form-label">Paragraph Number/Page number</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="courtCase_Num">
                                     </div>
                                 </div>
                             </div>
                             <br />
 
+
+                            <!-- <div class="col-sm-12 alert alert-primary" role="alert">
+                                Annotation buttons will appear after highlighting the texts in the scenario above.<br />
+                                Clicking on these buttons will add the annotation button text at start of the cursor in the analysis text box.<br />
+                                If there is no cursor it will append to the end of the text. <br />
+                            </div>-->
                             <div class="row">
-                                <label class="col-sm-12 col-form-label">Annotation Buttons</label>
-                                <div class="col-sm-12 alert alert-primary" role="alert">
-                                    Annotation buttons will appear after highlighting the texts in the scenario above.<br />
-                                    Clicking on these buttons will add the annotation button text at start of the cursor in the analysis text box.<br />
-                                    If there is no cursor it will append to the end of the text. <br />
-                                </div>
+                                <label class="col-sm-12 col-form-label">Hihglited Text</label>
+
                                 <div class="col-sm-12 m-1" id="annotationBtns">
                                 </div>
                             </div>
                             <br />
-
+                            <!-- <div class="col-sm-12 alert alert-primary" role="alert">
+                                Clicking on these buttons will add the relationship text at start of the cursor in the analysis text box.<br />
+                                If there is no cursor it will append to the end of the text.<br />
+                            </div>-->
                             <div class="row">
-                                <label class="col-sm-12 col-form-label">Relation Buttons</label>
-                                <div class="col-sm-12 alert alert-primary" role="alert">
-                                    Clicking on these buttons will add the relationship text at start of the cursor in the analysis text box.<br />
-                                    If there is no cursor it will append to the end of the text.<br />
-                                </div>
+                                <label class="col-sm-12 col-form-label">Relations</label>
                                 <div class="col-sm-12" id="relationBtns">
                                 </div>
                             </div>
                             <br />
 
-                            <div class="form-floating">
-                                <label for="analysisTextArea">Analysis</label>
+                            <div class="row">
+                                <label>Analysis</label>
                                 <textarea class="form-control" placeholder="Analysis here" id="analysisTextArea" style="height: 100px;"></textarea>
                             </div>
                             <br />
@@ -244,16 +262,16 @@
                             <div class="row">
                                 <label for="inputText3" class="col-sm-2 col-form-label">Conclusion</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" id="conclusion">
                                 </div>
                             </div>
                             <br />
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">Submit Button</label>
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
+
+                            <!--Add a button to save the data.-->
+                            <div>
+                                <label class="col-sm-2 col-form-label">Export File</label>
+                                <button type="button" id="bt" class="btn btn-primary" value="Save data to file" onclick="saveFile()"> EXPORT </button>
                             </div>
                             <br />
                         </form>
@@ -278,6 +296,9 @@
 
 <!--Script to handle annotation of scenarios and auto button creation for highlighted text.-->
 <script type="text/javascript">
+    var selectedAnnotation = [];
+</script>
+<script type="text/javascript">
 
     // Get legal concepts.
 
@@ -301,7 +322,7 @@
         locale: 'auto',
         allowEmpty: true,
         widgets: [
-            /*            { widget: 'COMMENT' },*/ // Disabled comment since not used?
+            /*            {widget: 'COMMENT' },*/ // Disabled comment since not used?
             { widget: 'TAG', vocabulary: legalConceptList /*Set selectable vocabulary as legalConceptList.*/ }
         ],
         relationVocabulary: ['isRelated', 'isPartOf', 'isSameAs ']
@@ -331,8 +352,9 @@
         console.log('created', annotation);
         console.log('test retrieved value: ', annotation.target.selector[0].exact);
 
+        selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
         // On created annotation add a button with selected text for IRAC Analysis processing.
-        var selectedAnnotationText = annotation.target.selector[0].exact;
+        var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
 
         var annotationBtnDiv = document.getElementById('annotationBtns');
 
@@ -374,19 +396,19 @@
     });
 </script>
 
-<!--Script to display user name.-->
-<script>
-    function displayUser() {
-        var inputTest = localStorage['username'];
-        /*alert('Inserted Data ' + localStorage['username']);*/
-        document.getElementById('userDisplay').innerHTML = inputTest;
-    }
-</script>
+
 
 <!--Script to initialize multiselect for sections.-->
+
+
 <script type="text/javascript">
-    /*Note refer here for API documentation : https://davidstutz.github.io/bootstrap-multiselect/index.html#further-examples*/
     $(document).ready(function () {
-        $('#sectionMultiSelect').multiselect();
+        $('#selectedSections').multiselect({
+            enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+            dropUp: true
+        });
     });
 </script>
+
