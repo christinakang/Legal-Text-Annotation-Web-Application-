@@ -11,8 +11,8 @@ function getLegalConcepts() {
     // get declared legalConcepts.
     // remember to update the same one in scenario.html script.
     const legalConcepts = [
-        { id: 1, name: 'LegalConcept1', relatedTopic: 'Topic1', relatedSection: 'Section1', other: 'Other1' },
-        { id: 2, name: 'LegalConcept2', relatedTopic: 'Topic2', relatedSection: 'Section2', other: 'Other2' }
+        { id: 1, name: 'Offer Date', relatedTopic: 'Offer and Acceptance', relatedSection: 'Section3', other: '' },
+        { id: 2, name: 'Communication of Acceptance', relatedTopic: 'Offer and Acceptance', relatedSection: 'Section3', other: '' }
     ];
 
     displayLegalConcepts(legalConcepts);
