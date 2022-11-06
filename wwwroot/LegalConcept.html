@@ -99,115 +99,31 @@
             <h1 class="h3 mb-2 text-gray-800">Legal Concept</h1>
             <div class="card shadow mb-4">
 
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Legal Concept Table</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Legal Concept</th>
-                                    <th>Related topic</th>
-                                    <th>Related section</th>
-                                    <th>Other</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Legal Concept Table</h6>
                     </div>
-
-                    <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createLegalConceptModal">Add Legal Concept <i class="fas fa-plus"></i></button>
-
-                    <!-- Create Modal -->
-                    <div id="createLegalConceptModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title"><b>Add legal concept</b></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="md-form">
-                                        <label>Name</label>
-                                        <input type="text" id="nameInput" class="form-control validate">
-                                    </div>
-
-                                    <div class="md-form">
-                                        <label>Related topic</label>
-                                        <input type="text" id="relatedTopicInput" class="form-control validate">
-                                    </div>
-
-                                    <div class="md-form">
-                                        <label>Related section</label>
-                                        <input type="text" id="relatedSectionInput" class="form-control validate">
-                                    </div>
-
-                                    <div class="md-form">
-                                        <label>Other</label>
-                                        <input type="text" id="otherInput" class="form-control validate">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" onclick="addLegalConcept()" data-dismiss="modal">Create</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Update Modal -->
-                    <div id="updateLegalConceptModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title"><b>Update legal concept</b></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="md-form">
-                                        <label>Id</label>
-                                        <input type="text" id="idInputUpdate" class="form-control validate" disabled>
-                                    </div>
-                                    <div class="md-form">
-                                        <label>Name</label>
-                                        <input type="text" id="nameInputUpdate" class="form-control validate">
-                                    </div>
-
-                                    <div class="md-form">
-                                        <label>Related topic</label>
-                                        <input type="text" id="relatedTopicInputUpdate" class="form-control validate">
-                                    </div>
-
-                                    <div class="md-form">
-                                        <label>Related section</label>
-                                        <input type="text" id="relatedSectionInputUpdate" class="form-control validate">
-                                    </div>
-
-                                    <div class="md-form">
-                                        <label>Other</label>
-                                        <input type="text" id="otherInputUpdate" class="form-control validate">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" onclick="updateLegalConcept()" data-dismiss="modal">Update</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Legal Concept</th>
+                                        <th>Related topic</th>
+                                        <th>Related section</th>
+                                        <th>Other</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- /.container-fluid -->
         </div>
-        <!-- /.container-fluid -->
-    </div>
-    <!-- End of Main Content -->
+        <!-- End of Main Content -->
     </div>
     <!-- End of Content Wrapper -->
     </div>
