@@ -34,7 +34,7 @@
     <link href="css/recogito.min.css" rel="stylesheet">
 
     <!-- Functions-->
-    <script type="text/javascript" src="js/review.js"></script>
+    <script type="text/javascript" src="js/scenario.js"></script>
     <script type="text/javascript" src="js/recogito.min.js"></script>
 
     <!-- Multiselect Bootstrap -->
@@ -65,7 +65,6 @@
                 <div class="sidebar-brand-text mx-3">Legal Text Annotation</div>
             </a>
 
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="dashboard.html">
@@ -73,7 +72,6 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -106,8 +104,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
@@ -147,10 +143,8 @@
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
-
                             </div>
                         </li>
-
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
@@ -350,8 +344,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-
 </body>
 </html>
 
@@ -361,20 +353,20 @@
 </script>
 <script type="text/javascript">
 
+    // get declared legalConcepts.
+    // remember to update the same one in scenario.js.
+    const legalConcepts = [
+        { id: 1, name: 'LegalConcept1', relatedTopic: 'Topic1', relatedSection: 'Section1', other: 'Other1' },
+        { id: 2, name: 'LegalConcept2', relatedTopic: 'Topic2', relatedSection: 'Section2', other: 'Other2' }
+    ];
+
     // Get legal concepts.
 
     const legalConceptList = [];
 
-    fetch(legalConceptUri)
-        .then(response => response.json())
-        .then(data => {
-            // Store legal concepts in legalConceptList.
-
-            $.each(data, function (index, value) {
-                legalConceptList.push(value.name);
-            });
-        })
-        .catch(error => console.error('Unable to get legal concepts', error));
+    $.each(legalConcepts, function (index, value) {
+        legalConceptList.push(value.name);
+    });
 
     // Intialize Recogito.
 
@@ -411,49 +403,51 @@
     r.on('createAnnotation', function (annotation) {
         // Log highlighted text as new annotation for debugging purposes.
         console.log('created', annotation);
-        console.log('test retrieved value: ', annotation.target.selector[0].exact);
 
-        selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
-        // On created annotation add a button with selected text for IRAC Analysis processing.
-        var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
+        if (annotation.motivation == null && annotation.motivation != 'linking') {
+            selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
+            // On created annotation add a button with selected text for IRAC Analysis processing.
+            var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
 
-        var annotationBtnDiv = document.getElementById('annotationBtns');
+            var annotationBtnDiv = document.getElementById('annotationBtns');
 
-        // Create button element.
-        var button = document.createElement('button');
+            // Create button element.
+            var button = document.createElement('button');
 
-        button.type = 'button';
+            button.type = 'button';
 
-        // Id will be the selectedAnnotationText + 'Btn'.
-        // Ex.Selected legal => The button id is 'legalBtn'.
-        // It is case senstive and also will take in spaces.
-        button.id = selectedAnnotationText + 'Btn';
+            // Id will be the selectedAnnotationText + 'Btn'.
+            // Ex.Selected legal => The button id is 'legalBtn'.
+            // It is case senstive and also will take in spaces.
+            button.id = selectedAnnotationText + 'Btn';
 
-        // Add text to be displayed on button.
-        button.innerHTML = selectedAnnotationText;
+            // Add text to be displayed on button.
+            button.innerHTML = selectedAnnotationText;
 
-        // Add onClick event to add the selected annotation to analysis text area at the cursor.
-        button.addEventListener('click', function (event) {
-            console.log(button.innerHTML);
+            // Add onClick event to add the selected annotation to analysis text area at the cursor.
+            button.addEventListener('click', function (event) {
+                console.log(button.innerHTML);
 
-            // Get current position of cursor at analysis text area.
-            // If no cursor, it will append at the end of the textArea's text.
-            var analysisTxtBox = document.getElementById('analysisTextArea');
-            let curPos = analysisTxtBox.selectionStart;
+                // Get current position of cursor at analysis text area.
+                // If no cursor, it will append at the end of the textArea's text.
+                var analysisTxtBox = document.getElementById('analysisTextArea');
+                let curPos = analysisTxtBox.selectionStart;
 
-            // Get current text in analysisTextArea.
-            var analysisTextAreaValue = $('#analysisTextArea').val();
+                // Get current text in analysisTextArea.
+                var analysisTextAreaValue = $('#analysisTextArea').val();
 
-            // Insert text at cursor position.
-            $('#analysisTextArea').val(
-                analysisTextAreaValue.slice(0, curPos) + selectedAnnotationText + analysisTextAreaValue.slice(curPos));
+                // Insert text at cursor position.
+                $('#analysisTextArea').val(
+                    analysisTextAreaValue.slice(0, curPos) + selectedAnnotationText + analysisTextAreaValue.slice(curPos));
 
-            // Restore cursor position to end of analysis text area after clicking on button.
-            analysisTextArea.focus();
-        });
+                // Restore cursor position to end of analysis text area after clicking on button.
+                analysisTextArea.focus();
+            });
 
-        // Append the  button to annotation div.
-        annotationBtnDiv.appendChild(button);
+            // Append the  button to annotation div.
+            annotationBtnDiv.appendChild(button);
+
+        }
     });
 </script>
 

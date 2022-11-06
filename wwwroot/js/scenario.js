@@ -1,7 +1,8 @@
-const legalConceptUri = 'api/legalconcepts';
-const scenariosUri = 'api/scenarios';
-
-var scenarioList = null;
+// Scenario list constant.
+const scenarioList = [
+    { id: 1, text: 'Test scenario1 text for testing yada yada yada yeee.' },
+    { id: 2, text: 'Test scenario2 text for testing wee waa woo woz.' },
+];
 
 // function that runs all necessary initial retrieval.
 function init() {
@@ -13,19 +14,13 @@ function init() {
 
 // The the list of scenarios available in the database.
 function getScenarioList() {
-    // call db to get all scenarios.
-    fetch(scenariosUri)
-        .then(response => response.json())
-        .then(data => {
-            scenarioList = data;
-            var scenarioSelect = document.getElementById("scenarioSelect");
+    // get all declared scenarios.
+    var scenarioSelect = document.getElementById("scenarioSelect");
 
-            $.each(data, function (index, value) {
-                scenarioSelect.innerHTML +=
-                    ('<option value="' + value.id + '">' + value.id + '</option>\n');
-            });
-        })
-        .catch(error => console.error('Unable to get scenarios', error));
+    $.each(scenarioList, function (index, value) {
+        scenarioSelect.innerHTML +=
+            ('<option value="' + value.id + '">' + value.id + '</option>\n');
+    });
 }
 
 // get scenario based on id.
@@ -45,6 +40,8 @@ function getScenario() {
             changeScenarioText(value);
         }
     });
+
+    r.clearAnnotations();
 }
 
 // Change the scenario text based on retrieved scenario text from db.
@@ -53,35 +50,8 @@ function changeScenarioText(scenario) {
     scenarioText.innerHTML = scenario.text;
 }
 
-// Default add scenario logic.
-function addScenario() {
-    const addNameTextbox = document.getElementById('add-name');
-
-    const item = {
-        isComplete: false,
-        name: addNameTextbox.value.trim()
-    };
-
-    fetch(uri, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(item)
-    })
-        .then(response => response.json())
-        .then(() => {
-            getItems();
-            addNameTextbox.value = '';
-        })
-        .catch(error => console.error('Unable to add item.', error));
-}
-
 function createRelationButtons() {
-    // TODO: Create and get relation information from a relation table?
-
-    // Id, value array. To be replaced with actual table data.
+    // Const relation.
     const relationData = [
         { name: ' If Else ', text: 'If ..... Else ....' },
         { name: ' If Then ', text: 'If ..... Then ....' }
