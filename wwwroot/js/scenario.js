@@ -103,11 +103,11 @@ function saveFile() {
     var Username = document.getElementById('userDisplay');
     var scenarioID = document.getElementById('scenarioSelect');
     var issues = document.getElementById('issues');
-    var sections = document.getElementById('selectedSections');
     var relatedCourtCase = document.getElementById('relatedCourtCase');
     var courtCaseNum = document.getElementById('courtCase_Num');
     var analysis = document.getElementById('analysisTextArea');
     var conclusion = document.getElementById('conclusion');
+    var selectedSectionOptions = $('#selectedSections').val();
 
     // This variable stores all the data.
     var data =
@@ -115,14 +115,14 @@ function saveFile() {
         'Scenario Id: ' + scenarioID.value + ' \r\n ' +
         'Selected Text & tag: ' + JSON.stringify(selectText_Tags) + ' \r\n ' +
         'Issues: ' + issues.value + ' \r\n ' +
-        'sections: ' + sections.value + ' \r\n ' +
+        'sections: ' + selectedSectionOptions + ' \r\n ' +
         'Related Court Case: ' + relatedCourtCase.value + ' \r\n ' +
         'Court case page/paragraph num: ' + courtCaseNum.value + ' \r\n ' +
         'Analysis : ' + analysis.value + ' \r\n ' +
         'Conclustion: ' + conclusion.value + ' \r\n '
         ;
 
-    console.log(data)
+    console.log(data);
     var currentdate = new Date();
     var date = currentdate.getDate() + "_" + (currentdate.getMonth() + 1) + "_" +
         currentdate.getHours() + currentdate.getMinutes();
