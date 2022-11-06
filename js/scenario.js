@@ -65,6 +65,7 @@ function createRelationButtons() {
         var button = document.createElement('button');
 
         button.type = 'button';
+        button.className = 'btn btn-primary';
 
         // Id will be the relationName + 'Btn'.
         // Ex.Selected IfElse => The button id is 'IfElseBtn'.
