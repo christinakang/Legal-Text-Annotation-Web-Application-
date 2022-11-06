@@ -1,7 +1,8 @@
 // Scenario list constant.
 const scenarioList = [
-    { id: 1, text: 'Test scenario1 text for testing yada yada yada yeee.' },
-    { id: 2, text: 'Test scenario2 text for testing wee waa woo woz.' },
+    { id: 1, text: "On 1 November, Ahmad who lives next door to Hussain called on Hussain and offer to sell his IBM computer for RM2,000 . On 3 November, Hussain wrote and posted a letter to Ahmad accepting the offer. The letter was not addressed properly. Hence Ahmad received the letter of acceptance on 8 November instead of on 5 November. On the evening of 6 November, Ahmad telephoned Hussain and said 'I revoke my offer to you'" },
+    {
+        id: 2, text: "'Cathy's son, Dave, aged 21, was studying for a diploma in computer science at a University in Kuala Lumpur. He lived in a student residence. It was a city council legislative requirement that it was illegal to smoke in student residence, offices, shops, or any enclosed place where someone else is residing, studying or working within the campus. Dave gave up smoking due to this requirement.However, Cathy was worried that under the pressure of preparing for the examination Dave would start smoking again, and so she promised to pay Dave RM500 if he did not smoke at all until he had completed the course.She also promised to buy him a car if he passed the examinations.Cathy run an online bookstore, and asked Dave to maintain and update the website from time to time.She was pleased with the result, and said she would give him RM1, 000 'for all his hard work'. Dave passed his examinations, obtained his diploma and moved to live in Johor Bahru where there was no legal requirement on banning of smoking in public enclosed areas.He has not started to smoke again after he left Kuala Lumpur.Cathy has not made either of the promised payments, or bought the car." },
 ];
 
 // function that runs all necessary initial retrieval.
@@ -65,7 +66,7 @@ function createRelationButtons() {
         var button = document.createElement('button');
 
         button.type = 'button';
-        button.className = 'btn btn-primary';
+        button.className = 'btn btn-outline-info';
 
         // Id will be the relationName + 'Btn'.
         // Ex.Selected IfElse => The button id is 'IfElseBtn'.

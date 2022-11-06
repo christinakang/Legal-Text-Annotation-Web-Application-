@@ -213,7 +213,7 @@ table {
 }
 
 caption {
-    padding-top: 0.75rem;
+    padding-top: 0.75rem;button
     padding-bottom: 0.75rem;
     color: #858796;
     text-align: left;
@@ -231,7 +231,8 @@ label {
 }
 
 button {
-    border-radius: 10 ;
+    border-radius: 10px;
+    margin:25px;
 }
 
     button:focus:not(:focus-visible) {
@@ -243,7 +244,7 @@ button,
 select,
 optgroup,
 textarea {
-    margin: 10;
+    margin: 25px;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
@@ -2508,6 +2509,7 @@ textarea.form-control {
     font-weight: 400;
     color: #858796;
     text-align: center;
+    margin: 25px;
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -2555,6 +2557,7 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #4e73df;
     border-color: #4e73df;
+
 }
 
     .btn-primary:hover {

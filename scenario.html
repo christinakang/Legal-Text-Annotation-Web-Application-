@@ -285,10 +285,10 @@
                             <br />
 
                             <!-- <div class="col-sm-12 alert alert-primary" role="alert">
-                                Annotation buttons will appear after highlighting the texts in the scenario above.<br />
-                                Clicking on these buttons will add the annotation button text at start of the cursor in the analysis text box.<br />
-                                If there is no cursor it will append to the end of the text. <br />
-                            </div>-->
+        Annotation buttons will appear after highlighting the texts in the scenario above.<br />
+        Clicking on these buttons will add the annotation button text at start of the cursor in the analysis text box.<br />
+        If there is no cursor it will append to the end of the text. <br />
+    </div>-->
                             <div class="row">
                                 <label class="col-sm-12 col-form-label">Highlighted Text</label>
 
@@ -297,9 +297,9 @@
                             </div>
                             <br />
                             <!-- <div class="col-sm-12 alert alert-primary" role="alert">
-                                Clicking on these buttons will add the relationship text at start of the cursor in the analysis text box.<br />
-                                If there is no cursor it will append to the end of the text.<br />
-                            </div>-->
+        Clicking on these buttons will add the relationship text at start of the cursor in the analysis text box.<br />
+        If there is no cursor it will append to the end of the text.<br />
+    </div>-->
                             <div class="row">
                                 <label class="col-sm-12 col-form-label">Relations</label>
                                 <div class="col-sm-12" id="relationBtns">
@@ -325,7 +325,11 @@
                             <div>
                                 <label class="col-sm-2 col-form-label">Export File</label>
                                 <button type="button" id="bt" class="btn btn-primary" value="Save data to file" onclick="saveFile()"> EXPORT </button>
+                                <button type="button" id="bt" class="btn btn-primary" value="Save data to file" onclick="saveFile()"> EXPORT </button>
+
                             </div>
+
+
                             <br />
                         </form>
                     </div>
@@ -415,7 +419,7 @@
             var button = document.createElement('button');
 
             button.type = 'button';
-            button.className = 'btn btn-primary';
+            button.className = 'btn btn-outline-info';
 
             // Id will be the selectedAnnotationText + 'Btn'.
             // Ex.Selected legal => The button id is 'legalBtn'.
