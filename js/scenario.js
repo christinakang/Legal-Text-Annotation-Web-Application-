@@ -153,3 +153,5 @@ function displayUser() {
     console.log('User name : ', inputTest)
     document.getElementById('userDisplay').innerHTML = inputTest;
 }
+
+
