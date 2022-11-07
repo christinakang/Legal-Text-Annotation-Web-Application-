@@ -1,0 +1,10 @@
+ User: admin 
+ Scenario Id: 1 
+ Selected Text & tag: [{"selectedText":"1 November","selectedTag":"Offer date"},{"selectedText":"\nOn 3 November, Hussain wrote and posted a letter to Ahmad accepting the offer","selectedTag":"Communication of acceptance"},{"selectedText":"6 November, Ahmad telephoned Hussain and said ‘I revoke my offer to you’.","selectedTag":"revocation of acceptance"}] 
+ Issues: Can Ahmad revoke the offer although Hussain has sent out the acceptance letter? 
+ sections: 4.2a 
+ Related Court Case: Ignatius v Bell (1913) 2 FMLSR 115 
+ Court case page/paragraph num: 20 
+ Analysis : In S.4(2)(a) Contracts Act 1950, it provides that the person making the offer (offeror) is bound when the letter of acceptance has been posted irrespective of whether it has been delayed or lost in the course of transit. If Ahmad had revoked the offer by way of telephone, then this revocation would not take place as he had received the letter of acceptance from Hussain. 
+ Conclustion: Therefore, Ahmad cannot revoke his offer as he is bound in law to accept the letter of acceptance once it has been posted.  
+ 
