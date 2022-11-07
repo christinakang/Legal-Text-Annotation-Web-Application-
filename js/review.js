@@ -83,6 +83,12 @@
         //console.log(tmp);
         scenarioID = tmp[1];
         console.log(scenarioID);
+        $.each(scenarioList, function (index, value) {
+            if (value.id == scenarioID) {
+                changeScenarioText(value);
+            }
+        });
+        
         document.getElementById("scenarioSelect").value = scenarioID;
 
         //update IRAC form
@@ -137,3 +143,11 @@ function processDataAsObj(csv){
     drawOutputAsObj(lines);
 }
 */
+
+// Change the scenario text based on retrieved scenario text from db.
+function changeScenarioText(scenario) {
+    var scenarioText = document.getElementById("ScenarioText");
+    scenarioText.innerHTML = scenario.text;
+}
+
+
