@@ -419,6 +419,8 @@
 
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
+
+            console.log(selectedAnnotation);
             // On created annotation add a button with selected text for IRAC Analysis processing.
             var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
 
