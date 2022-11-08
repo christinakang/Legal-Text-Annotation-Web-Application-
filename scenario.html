@@ -272,23 +272,39 @@
                                 <div class="col-sm-6">
                                     <label for="inputText2" class="col-sm-36 col-form-label">Related court case</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="relatedCourtCase">
+                                        <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="relatedCourtCase">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputText2" class="col-sm-10 col-form-label">Paragraph/Page number</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="courtCase_Num">
+                                    <div class="col-sm-12">
+                                        <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="courtCase_Num">
                                     </div>
                                 </div>
                             </div>
                             <br />
                             <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" value="Save data to file" onclick="generateCourtCasePageNumberBtn()" disabled>Generate court case/page number button</button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
                                 <label class="col-sm-12 col-form-label">Highlighted Text</label>
-
                                 <div class="col-sm-12 m-1" id="annotationBtns">
                                 </div>
                             </div>
+                            <div class="row">
+                                <label class="col-sm-12 col-form-label">Related sections</label>
+                                <div class="col-sm-12 m-1" id="relatedSectionBtns">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-12 col-form-label">Related court case[Paragraph/page number]</label>
+                                <div class="col-sm-12 m-1" id="courtCasePageNumberBtns">
+                                </div>
+                            </div>
+
                             <br />
                             <div class="row">
                                 <label class="col-sm-12 col-form-label">Relations</label>
@@ -315,9 +331,7 @@
                             <div>
                                 <label class="col-sm-2 col-form-label">Export File</label>
                                 <button type="button" id="bt" class="btn btn-primary" value="Save data to file" onclick="saveFile()"> EXPORT </button>
-                             
                             </div>
-
 
                             <br />
                         </form>
@@ -417,7 +431,7 @@
 
             // Save to a list of existing annotation buttons.
             annotationBtnIds.push(button.id);
-            
+
             // Add text to be displayed on button.
             button.innerHTML = selectedAnnotationText;
 

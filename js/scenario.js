@@ -4,6 +4,10 @@ const scenarioList = [
     { id: 2, text: "'Cathy's son, Dave, aged 21, was studying for a diploma in computer science at a University in Kuala Lumpur. He lived in a student residence. It was a city council legislative requirement that it was illegal to smoke in student residence, offices, shops, or any enclosed place where someone else is residing, studying or working within the campus. Dave gave up smoking due to this requirement.However, Cathy was worried that under the pressure of preparing for the examination Dave would start smoking again, and so she promised to pay Dave RM500 if he did not smoke at all until he had completed the course.She also promised to buy him a car if he passed the examinations.Cathy run an online bookstore, and asked Dave to maintain and update the website from time to time.She was pleased with the result, and said she would give him RM1, 000 'for all his hard work'. Dave passed his examinations, obtained his diploma and moved to live in Johor Bahru where there was no legal requirement on banning of smoking in public enclosed areas.He has not started to smoke again after he left Kuala Lumpur.Cathy has not made either of the promised payments, or bought the car." },
 ];
 
+// Store the single courtCasePageNumber button Id.
+// Only one can exist at a time.
+var courtCasePageNumberId = null;
+
 // function that runs all necessary initial retrieval.
 function init() {
     // Get the first id scenerio from db.
@@ -158,9 +162,88 @@ function displayUser() {
     document.getElementById('userDisplay').innerHTML = inputTest;
 }
 
+// Function to remove all the annotation btn ids from the list.
 function removeAllAnnotationBtnIds() {
     $.each(annotationBtnIds, function (index, value) {
         var elem = document.getElementById(value);
         elem.parentNode.removeChild(elem);
     });
+}
+
+// Function to generate court case page number button.
+// Will replace the existing button if any.
+// Cannot create a court case page number button if the two affected fields are null or String empty('').
+function generateCourtCasePageNumberBtn() {
+    // If either field is null, do not create button.
+    var relatedCourtCaseField = document.getElementById('relatedCourtCase');
+    if (relatedCourtCaseField.value == null || relatedCourtCaseField.value == '')
+        return;
+
+    var relatedCourtCaseNumField = document.getElementById('courtCase_Num');
+    if (relatedCourtCaseNumField.value == null || relatedCourtCaseField.value == '')
+        return;
+
+    // remove existing court case page number button id if not null.
+    if (courtCasePageNumberId != null) {
+        var elem = document.getElementById(courtCasePageNumberId);
+        elem.parentNode.removeChild(elem);
+    }
+
+    // Merge the court case and page number text into one text.
+    var mergedCourtCasePageNumberText = relatedCourtCaseField.value + '[' + relatedCourtCaseNumField.value + ']';
+
+    // Get courtCasePageNumberBtns div id.
+    var courtCasePageNumberBtnsDiv = document.getElementById('courtCasePageNumberBtns');
+
+    // Create button element.
+    var button = document.createElement('button');
+
+    button.type = 'button';
+    button.className = 'btn btn-outline-info';
+
+    // Id will be the relationName + 'Btn'.
+    // Ex.Selected IfElse => The button id is 'IfElseBtn'.
+    // It is case senstive and also will take in spaces.
+    button.id = mergedCourtCasePageNumberText + 'Btn';
+
+    // Add button id to global.
+    courtCasePageNumberId = button.id;
+
+    // Add text to be displayed on button.
+    button.innerHTML = mergedCourtCasePageNumberText;
+
+    // Add onClick event to add the selected relation to analysis text area at the cursor.
+    button.addEventListener('click', function (event) {
+        // Get current position of cursor at analysis text area.
+        // If no cursor, it will append at the end of the textArea's text.
+        var analysisTxtBox = document.getElementById('analysisTextArea');
+        let curPos = analysisTxtBox.selectionStart;
+
+        // Get current text in analysisTextArea.
+        var analysisTextAreaValue = $('#analysisTextArea').val();
+
+        // Insert text at cursor position.
+        $('#analysisTextArea').val(
+            analysisTextAreaValue.slice(0, curPos) + mergedCourtCasePageNumberText + analysisTextAreaValue.slice(curPos));
+
+        // Restore cursor position to end of analysis text area after clicking on button.
+        analysisTextArea.focus();
+    });
+
+    // Append the  button to annotation div.
+    courtCasePageNumberBtnsDiv.appendChild(button);
+}
+
+// Function to check if the the generate cour case page number(CCPN) button is disabled.
+function checkDisabledCCPN() {
+    var relatedCourtCaseField = document.getElementById('relatedCourtCase');
+    var relatedCourtCaseNumField = document.getElementById('courtCase_Num');
+
+    if (relatedCourtCaseField.value == null || relatedCourtCaseField.value == ''
+        || relatedCourtCaseNumField.value == null || relatedCourtCaseNumField.value == '') {
+        document.getElementById('generateCCPNBtn').disabled = true;
+    }
+    else {
+        document.getElementById('generateCCPNBtn').disabled = false;
+    }
 }
