@@ -366,6 +366,7 @@
     // Get legal concepts.
 
     const legalConceptList = [];
+    var annotationBtnIds = [];
 
     $.each(legalConcepts, function (index, value) {
         legalConceptList.push(value.name);
@@ -425,6 +426,9 @@
             // It is case senstive and also will take in spaces.
             button.id = selectedAnnotationText + 'Btn';
 
+            // Save to a list of existing annotation buttons.
+            annotationBtnIds.push(button.id);
+            
             // Add text to be displayed on button.
             button.innerHTML = selectedAnnotationText;
 
