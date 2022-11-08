@@ -295,7 +295,7 @@
                             </div>
                             <br />
                             <div class="row">
-                                <label class="col-sm-12 col-form-label">Highlighted Text</label>
+                                <label class="col-sm-12 col-form-label">Highlighted Text and Tag</label>
                                 <div class="col-sm-12 m-1" id="annotationBtns">
                                 </div>
                             </div>
@@ -342,12 +342,12 @@
                         </form>
                     </div>
                     <!-- /.container-fluid -->
-                    <div class="col-sm-12">
-                        <button class="btn btn-success btn-icon-split">ADD IRAC</button>
-                    </div>
+                    <!--<div class="col-sm-12">
+        <button class="btn btn-success btn-icon-split">ADD IRAC</button>
+    </div> -->
                 </div>
-                <!-- End of Main Content -->
-            </div>
+    <!-- End of Main Content -->
+                </div>
             <!-- End of Content Wrapper -->
         </div>
     </div>
@@ -420,6 +420,16 @@
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
             // On created annotation add a button with selected text for IRAC Analysis processing.
             var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
+
+            if (annotation.motivation == null && annotation.body.motivation == 'linking') {
+                var relations = annotation.body[0].value;
+                var linkText = [];
+                linkText.push(annotation.target);
+                console.log(relations);
+                console.log(target);
+            }
+
+            
 
             var annotationBtnDiv = document.getElementById('annotationBtns');
 

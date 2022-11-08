@@ -65,8 +65,8 @@ function changeScenarioText(scenario) {
 function createRelationButtons() {
     // Const relation.
     const relationData = [
-        { name: ' If Else ', text: 'IF ..... ELSE ....' },
-        { name: ' If Then ', text: 'IF ..... THEN ....' },
+        { name: ' IF  ELSE  ', text: 'IF ..... ELSE ....' },
+        { name: ' IF  THEN ', text: 'IF ..... THEN ....' },
         { name: ' ONLY IF ', text: 'ONLY IF' },
         { name: ' AND ', text: 'AND' },
         { name: ' OR ', text: 'OR' },
