@@ -199,7 +199,7 @@
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Select Related sections </label>
                                 <div class="col-sm-8">
-                                    <select id="selectedSections" multiple="multiple" class="col-sm-8">
+                                    <select id="selectedSections" onchange="checkDisabledRS()" multiple="multiple" class="col-sm-8">
                                         <optgroup label="Section 1">
                                             <option value="1.1">Section 1.1</option>
                                             <option value="1.2">Section 1.2</option>
@@ -267,7 +267,12 @@
                                 </div>
                             </div>
                             <br />
-
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Generate related sections button</button>
+                                </div>
+                            </div>
+                            <br />
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="inputText2" class="col-sm-36 col-form-label">Related court case</label>

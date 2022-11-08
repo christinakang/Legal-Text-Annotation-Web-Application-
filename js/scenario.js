@@ -8,6 +8,9 @@ const scenarioList = [
 // Only one can exist at a time.
 var courtCasePageNumberId = null;
 
+// Store related section buttons Ids.
+var relatedSectionBtnIds = [];
+
 // function that runs all necessary initial retrieval.
 function init() {
     // Get the first id scenerio from db.
@@ -234,7 +237,67 @@ function generateCourtCasePageNumberBtn() {
     courtCasePageNumberBtnsDiv.appendChild(button);
 }
 
-// Function to check if the the generate cour case page number(CCPN) button is disabled.
+// Function to generate related sections button.
+// Will replace the existing buttons if any.
+// Cannot create if there are no selected related sections(disabled by UI).
+function generateRelatedSectionsBtn() {
+    // remove existing court case page number button id if not null.
+    if (relatedSectionBtnIds.length > 0) {
+        $.each(relatedSectionBtnIds, function (index, value) {
+            var elem = document.getElementById(value);
+            elem.parentNode.removeChild(elem);
+        });
+    }
+
+    // Get courtCasePageNumberBtns div id.
+    var relatedSectionBtnsDiv = document.getElementById('relatedSectionBtns');
+
+    let relationSectionArray = $('#selectedSections').val();
+
+    $.each(relationSectionArray, function (index, value) {
+        // Create button element.
+        var button = document.createElement('button');
+
+        button.type = 'button';
+        button.className = 'btn btn-outline-info';
+
+        let mergedText = 'Section ' + value;
+
+        // Id will be the relationName + 'Btn'.
+        // Ex.Selected IfElse => The button id is 'IfElseBtn'.
+        // It is case senstive and also will take in spaces.
+        button.id = mergedText + 'Btn';
+
+        // Store related section btn id.
+        relatedSectionBtnIds.push(button.id);
+
+        // Add text to be displayed on button.
+        button.innerHTML = mergedText;
+
+        // Add onClick event to add the selected relation to analysis text area at the cursor.
+        button.addEventListener('click', function (event) {
+            // Get current position of cursor at analysis text area.
+            // If no cursor, it will append at the end of the textArea's text.
+            var analysisTxtBox = document.getElementById('analysisTextArea');
+            let curPos = analysisTxtBox.selectionStart;
+
+            // Get current text in analysisTextArea.
+            var analysisTextAreaValue = $('#analysisTextArea').val();
+
+            // Insert text at cursor position.
+            $('#analysisTextArea').val(
+                analysisTextAreaValue.slice(0, curPos) + mergedText + analysisTextAreaValue.slice(curPos));
+
+            // Restore cursor position to end of analysis text area after clicking on button.
+            analysisTextArea.focus();
+        });
+
+        // Append the  button to annotation div.
+        relatedSectionBtnsDiv.appendChild(button);
+    });
+}
+
+// Function to check if the the generate court case page number(CCPN) button is disabled.
 function checkDisabledCCPN() {
     var relatedCourtCaseField = document.getElementById('relatedCourtCase');
     var relatedCourtCaseNumField = document.getElementById('courtCase_Num');
@@ -245,5 +308,17 @@ function checkDisabledCCPN() {
     }
     else {
         document.getElementById('generateCCPNBtn').disabled = false;
+    }
+}
+
+// Function to check if the the generate related section(RS) button is disabled.
+function checkDisabledRS() {
+    let selectedSectionOptions = $('#selectedSections').val().toString();
+    console.log(selectedSectionOptions);
+    if (selectedSectionOptions == '') {
+        document.getElementById('generateRSBtn').disabled = true;
+    }
+    else {
+        document.getElementById('generateRSBtn').disabled = false;
     }
 }
