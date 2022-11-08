@@ -303,7 +303,7 @@ function checkDisabledCCPN() {
     var relatedCourtCaseNumField = document.getElementById('courtCase_Num');
 
     if (relatedCourtCaseField.value == null || relatedCourtCaseField.value == ''
-        || relatedCourtCaseNumField.value == null || relatedCourtCaseNumField.value == '') {
+        ) {
         document.getElementById('generateCCPNBtn').disabled = true;
     }
     else {
