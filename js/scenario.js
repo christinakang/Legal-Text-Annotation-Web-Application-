@@ -139,7 +139,7 @@ function saveFile() {
         'Court case page/paragraph num: ' + courtCaseNum.value + ' \r\n ' +
         'Analysis : ' + analysis.value + ' \r\n ' +
         'Conclustion: ' + conclusion.value + ' \r\n ' +
-        'Hilighted Objectcs : ' + highlitedObject + '\r\n '
+        'Hilighted Objectcs : ' + JSON.stringify(highlitedObject)  + '\r\n '
         ;
 
     console.log(data);
