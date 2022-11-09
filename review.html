@@ -445,12 +445,6 @@
             // On created annotation add a button with selected text for IRAC Analysis processing.
             var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
 
-            //capture the relation tag
-
-
-
-
-
             var annotationBtnDiv = document.getElementById('annotationBtns');
 
             // Create button element.
@@ -494,6 +488,65 @@
             annotationBtnDiv.appendChild(button);
 
         }
+        else {
+            //capture relation tagging
+
+            var relation = annotation.body[0].value;
+            var target1 = annotation.target[0].id;
+            var target2 = annotation.target[1].id;
+
+            var object1 = highlitedObject.find(obj => obj.id === target1);
+            word1 = object1.target.selector[0].exact + '{' + object1.body[0].value + '}';
+
+            var object2 = highlitedObject.find(obj => obj.id === target2);
+            word2 = object2.target.selector[0].exact + '{' + object1.body[0].value + '}';
+
+            var finalRelation = '([' + word1 + ']' + '[' + relation + ']' + '[' + word2 + '])'
+
+            //console.log(finalRelation);
+
+            var annotationBtnDiv = document.getElementById('annotationBtns');
+
+            // Create button element.
+            var button = document.createElement('button');
+
+            button.type = 'button';
+            button.className = 'btn btn-outline-info';
+
+            // Id will be the selectedAnnotationText + 'Btn'.
+            // Ex.Selected legal => The button id is 'legalBtn'.
+            // It is case senstive and also will take in spaces.
+            button.id = finalRelation + 'Btn';
+
+            // Save to a list of existing annotation buttons.
+            annotationBtnIds.push(button.id);
+
+            // Add text to be displayed on button.
+            button.innerHTML = finalRelation;
+
+            // Add onClick event to add the selected annotation to analysis text area at the cursor.
+            button.addEventListener('click', function (event) {
+                console.log(button.innerHTML);
+
+                // Get current position of cursor at analysis text area.
+                // If no cursor, it will append at the end of the textArea's text.
+                var analysisTxtBox = document.getElementById('analysisTextArea');
+                let curPos = analysisTxtBox.selectionStart;
+
+                // Get current text in analysisTextArea.
+                var analysisTextAreaValue = $('#analysisTextArea').val();
+
+                // Insert text at cursor position.
+                $('#analysisTextArea').val(
+                    analysisTextAreaValue.slice(0, curPos) + selectedAnnotationText + analysisTextAreaValue.slice(curPos));
+
+                // Restore cursor position to end of analysis text area after clicking on button.
+                analysisTextArea.focus();
+            });
+
+            // Append the  button to annotation div.
+            annotationBtnDiv.appendChild(button);
+        };
     });
 </script>
 
