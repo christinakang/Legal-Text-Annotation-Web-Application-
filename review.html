@@ -35,9 +35,8 @@
 
     <!-- Functions-->
     <script type="text/javascript" src="js/scenario.js"></script>
-    <script type="text/javascript" src="js/review.js"></script>
-
     <script type="text/javascript" src="js/recogito.min.js"></script>
+    <script type="text/javascript" src="js/review.js"></script>
 
     <!-- Multiselect Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -48,7 +47,7 @@
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
 
-    <title>Scenario</title>
+    <title>Scenario Review </title>
 </head>
 
 <body id="page-top" onload=init()>
@@ -162,8 +161,21 @@
                         <input type="file" name="userFileData" id="usersFileData" accept=".csv,.txt,.docx,.xlsx">
                     </div>
 
-                    <div id="output"></div>
-
+                    <div class="card shadow mb-4">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Legal Concept</th>
+                                        <th>Related topic</th>
+                                        <th>Related section</th>
+                                        <th>Other</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                     <!-- Basic Card Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -209,7 +221,7 @@
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Select Related sections </label>
                                 <div class="col-sm-8">
-                                    <select id="selectedSections" multiple="multiple" class="col-sm-8">
+                                    <select id="selectedSections" onchange="checkDisabledRS()" multiple="multiple" class="col-sm-8">
                                         <optgroup label="Section 1">
                                             <option value="1.1">Section 1.1</option>
                                             <option value="1.2">Section 1.2</option>
@@ -277,39 +289,50 @@
                                 </div>
                             </div>
                             <br />
-
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Generate related sections button</button>
+                                </div>
+                            </div>
+                            <br />
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="inputText2" class="col-sm-36 col-form-label">Related court case</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="relatedCourtCase">
+                                        <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="relatedCourtCase">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputText2" class="col-sm-10 col-form-label">Paragraph/Page number</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="courtCase_Num">
+                                    <div class="col-sm-12">
+                                        <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="courtCase_Num">
                                     </div>
                                 </div>
                             </div>
                             <br />
-
-                            <!-- <div class="col-sm-12 alert alert-primary" role="alert">
-                                Annotation buttons will appear after highlighting the texts in the scenario above.<br />
-                                Clicking on these buttons will add the annotation button text at start of the cursor in the analysis text box.<br />
-                                If there is no cursor it will append to the end of the text. <br />
-                            </div>-->
                             <div class="row">
-                                <label class="col-sm-12 col-form-label">Highlighted Text</label>
-
-                                <div class="col-sm-12 m-1" id="annotationBtns">
+                                <div class="col-sm-12">
+                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" value="Save data to file" onclick="generateCourtCasePageNumberBtn()" disabled>Generate court case/page number button</button>
                                 </div>
                             </div>
                             <br />
-                            <!-- <div class="col-sm-12 alert alert-primary" role="alert">
-                                Clicking on these buttons will add the relationship text at start of the cursor in the analysis text box.<br />
-                                If there is no cursor it will append to the end of the text.<br />
-                            </div>-->
+                            <div class="row">
+                                <label class="col-sm-12 col-form-label">Highlighted Text and Tag</label>
+                                <div class="col-sm-12 m-1" id="annotationBtns">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-12 col-form-label">Related sections</label>
+                                <div class="col-sm-12 m-1" id="relatedSectionBtns">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-12 col-form-label">Related court case[Paragraph/page number]</label>
+                                <div class="col-sm-12 m-1" id="courtCasePageNumberBtns">
+                                </div>
+                            </div>
+
+                            <br />
                             <div class="row">
                                 <label class="col-sm-12 col-form-label">Relations</label>
                                 <div class="col-sm-12" id="relationBtns">
@@ -335,17 +358,15 @@
                             <div>
                                 <label class="col-sm-2 col-form-label">Export File</label>
                                 <button type="button" id="bt" class="btn btn-primary" value="Save data to file" onclick="saveFile()"> EXPORT </button>
-
                             </div>
-
 
                             <br />
                         </form>
                     </div>
                     <!-- /.container-fluid -->
-                    <div class="col-sm-12">
+                    <!--<div class="col-sm-12">
                         <button class="btn btn-success btn-icon-split">ADD IRAC</button>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- End of Main Content -->
             </div>
@@ -363,6 +384,7 @@
 <!--Script to handle annotation of scenarios and auto button creation for highlighted text.-->
 <script type="text/javascript">
     var selectedAnnotation = [];
+    var highlitedObject = [];
 </script>
 <script type="text/javascript">
 
@@ -376,6 +398,7 @@
     // Get legal concepts.
 
     const legalConceptList = [];
+    var annotationBtnIds = [];
 
     $.each(legalConcepts, function (index, value) {
         legalConceptList.push(value.name);
@@ -388,7 +411,6 @@
         locale: 'auto',
         allowEmpty: true,
         widgets: [
-            /*            {widget: 'COMMENT' },*/ // Disabled comment since not used?
             { widget: 'TAG', vocabulary: legalConceptList /*Set selectable vocabulary as legalConceptList.*/ }
         ],
         relationVocabulary: ['isRelated', 'isPartOf', 'isSameAs ']
@@ -415,14 +437,19 @@
 
     r.on('createAnnotation', function (annotation) {
         // Log highlighted text as new annotation for debugging purposes.
-        console.log('created', annotation);
+        console.log('annotation object created', annotation);
+        highlitedObject.push(annotation);
 
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
-
-            console.log(selectedAnnotation);
             // On created annotation add a button with selected text for IRAC Analysis processing.
             var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
+
+            //capture the relation tag
+
+
+
+
 
             var annotationBtnDiv = document.getElementById('annotationBtns');
 
@@ -436,6 +463,9 @@
             // Ex.Selected legal => The button id is 'legalBtn'.
             // It is case senstive and also will take in spaces.
             button.id = selectedAnnotationText + 'Btn';
+
+            // Save to a list of existing annotation buttons.
+            annotationBtnIds.push(button.id);
 
             // Add text to be displayed on button.
             button.innerHTML = selectedAnnotationText;

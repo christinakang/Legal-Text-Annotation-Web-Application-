@@ -1,5 +1,5 @@
 // function that runs all necessary initial retrieval.
-function init() {
+function init2() {
     getLegalConcepts();
 }
 
