@@ -138,7 +138,8 @@ function saveFile() {
         'Related Court Case: ' + relatedCourtCase.value + ' \r\n ' +
         'Court case page/paragraph num: ' + courtCaseNum.value + ' \r\n ' +
         'Analysis : ' + analysis.value + ' \r\n ' +
-        'Conclustion: ' + conclusion.value + ' \r\n '
+        'Conclustion: ' + conclusion.value + ' \r\n ' +
+        'Hilighted Objectcs : ' + highlitedObject + '\r\n '
         ;
 
     console.log(data);

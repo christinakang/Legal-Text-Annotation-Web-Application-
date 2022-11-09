@@ -362,6 +362,7 @@
 <!--Script to handle annotation of scenarios and auto button creation for highlighted text.-->
 <script type="text/javascript">
     var selectedAnnotation = [];
+    var highlitedObject = [];
 </script>
 <script type="text/javascript">
 
@@ -414,20 +415,17 @@
 
     r.on('createAnnotation', function (annotation) {
         // Log highlighted text as new annotation for debugging purposes.
-        console.log('created', annotation);
+        console.log('annotation object created', annotation);
+        highlitedObject.push(annotation);
 
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
             // On created annotation add a button with selected text for IRAC Analysis processing.
             var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
 
-            if (annotation.motivation == null && annotation.body.motivation == 'linking') {
-                var relations = annotation.body[0].value;
-                var linkText = [];
-                linkText.push(annotation.target);
-                console.log(relations);
-                console.log(target);
-            }
+            //capture the relation tag 
+
+
 
             
 
