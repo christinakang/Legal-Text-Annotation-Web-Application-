@@ -36,6 +36,7 @@
     <!-- Functions-->
     <script type="text/javascript" src="js/scenario.js"></script>
     <script type="text/javascript" src="js/recogito.min.js"></script>
+    <script type="text/javascript" src="js/legalConcept.js"></script>
 
     <!-- Multiselect Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -82,12 +83,12 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+           <!-- <li class="nav-item">
                 <a class="nav-link" href="LegalConcept.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Legal Concepts</span>
                 </a>
-            </li>
+            </li>-->
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -165,6 +166,22 @@
                                 <option value="0" selected>Select scenario</option>
                             </select>
                         </div>
+
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="legalConceptTable" width="80%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Legal Concept</th>
+                                            <th>Related topic</th>
+                                            <th>Related section</th>
+                                            <th>Other</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
                     </div>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -193,6 +210,8 @@
                                 <div class="col-sm-8">
                                     <input id="issues" type="text" class="form-control">
                                 </div>
+
+
                             </div>
                             <br />
 
@@ -312,7 +331,7 @@
 
                             <br />
                             <div class="row">
-                                <label class="col-sm-12 col-form-label">Relations</label>
+                                <label class="col-sm-12 col-form-label">Operational Relations</label>
                                 <div class="col-sm-12" id="relationBtns">
                                 </div>
                             </div>
@@ -487,3 +506,5 @@
         });
     });
 </script>
+
+
