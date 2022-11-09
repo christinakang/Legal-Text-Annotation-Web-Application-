@@ -409,7 +409,7 @@
         widgets: [
             { widget: 'TAG', vocabulary: legalConceptList /*Set selectable vocabulary as legalConceptList.*/ }
         ],
-        relationVocabulary: ['isRelated', 'isPartOf', 'isSameAs ']
+        relationVocabulary: ['belongTo', 'relatedTo', 'PartOf']
     });
 
     // Switch annotation mode (annotation/relationships).
@@ -507,7 +507,7 @@
             var button = document.createElement('button');
 
             button.type = 'button';
-            button.className = 'btn btn-outline-info';
+            button.className = 'btn btn-outline-success';
 
             // Id will be the selectedAnnotationText + 'Btn'.
             // Ex.Selected legal => The button id is 'legalBtn'.
@@ -534,7 +534,7 @@
 
                 // Insert text at cursor position.
                 $('#analysisTextArea').val(
-                    analysisTextAreaValue.slice(0, curPos) + selectedAnnotationText + analysisTextAreaValue.slice(curPos));
+                    analysisTextAreaValue.slice(0, curPos) + finalRelation + analysisTextAreaValue.slice(curPos));
 
                 // Restore cursor position to end of analysis text area after clicking on button.
                 analysisTextArea.focus();

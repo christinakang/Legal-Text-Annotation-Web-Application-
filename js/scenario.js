@@ -204,7 +204,7 @@ function generateCourtCasePageNumberBtn() {
     var button = document.createElement('button');
 
     button.type = 'button';
-    button.className = 'btn btn-outline-info';
+    button.className = 'btn btn-outline-primary';
 
     // Id will be the relationName + 'Btn'.
     // Ex.Selected IfElse => The button id is 'IfElseBtn'.
@@ -261,7 +261,7 @@ function generateRelatedSectionsBtn() {
         var button = document.createElement('button');
 
         button.type = 'button';
-        button.className = 'btn btn-outline-info';
+        button.className = 'btn btn-outline-secondary';
 
         let mergedText = 'Section ' + value;
 
