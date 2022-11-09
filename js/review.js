@@ -91,28 +91,7 @@
         
         document.getElementById("scenarioSelect").value = scenarioID;
 
-        tmp = lines[2].split('[');
-        text_tag = tmp;
-       
-        console.log(text_tag[1]);
-        selectedAnnotation.push(text_tag[1]); 
-            /*var currentword = text_tag[i];
-            var nextword = text_tag[i + 1];
-
-            if (currentword.search("selectedText") != -1) {
-                nextword = nextword.split('"');
-                //console.log(nextword[1]);
-                word = nextword[1];
-                
-            };
-            if (currentword.search("selectedTag") != -1) {
-                //console.log(nextword)
-                tag = nextword;
-            };*/
-            //console.log(word, tag);
-           
-     
-        
+          
 
         //update IRAC form
         tmp = lines[3].split(':');
@@ -141,6 +120,11 @@
         tmp = lines[8].split(':');
         conclusion = tmp[1];
         document.getElementById("conclusion").value = conclusion;
+
+        tmp = lines[9].split(':');
+        object = tmp[1];
+        console.log(object);
+        
 
         //output.innerHTML = str;
     }
@@ -172,5 +156,8 @@ function changeScenarioText(scenario) {
     var scenarioText = document.getElementById("ScenarioText");
     scenarioText.innerHTML = scenario.text;
 }
+
+
+
 
 
