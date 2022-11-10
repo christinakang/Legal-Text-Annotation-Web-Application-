@@ -82,13 +82,6 @@
                 </a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="LegalConcept.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Legal Concepts</span>
-                </a>
-            </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -161,21 +154,31 @@
                         <input type="file" name="userFileData" id="usersFileData" accept=".csv,.txt,.docx,.xlsx">
                     </div>
 
-                    <div class="card shadow mb-4">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Legal Concept</th>
-                                        <th>Related topic</th>
-                                        <th>Related section</th>
-                                        <th>Other</th>
-                                    </tr>
-                                </thead>
-                            </table>
+                    <p>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Legal Concepts</a>
+
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Legal Concept</th>
+                                                <th>Related topic</th>
+                                                <th>Related section</th>
+                                                <th>Other</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
+                </div>
                     <!-- Basic Card Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -316,29 +319,53 @@
                                 </div>
                             </div>
                             <br />
-                            <div class="row">
-                                <label class="col-sm-12 col-form-label">Highlighted Text and Tag</label>
-                                <div class="col-sm-12 m-1" id="annotationBtns">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label class="col-sm-12 col-form-label">Related sections</label>
-                                <div class="col-sm-12 m-1" id="relatedSectionBtns">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label class="col-sm-12 col-form-label">Related court case[Paragraph/page number]</label>
-                                <div class="col-sm-12 m-1" id="courtCasePageNumberBtns">
-                                </div>
-                            </div>
 
-                            <br />
+                            <!--Buttons display-->
+
                             <div class="row">
-                                <label class="col-sm-12 col-form-label">Relations</label>
-                                <div class="col-sm-12" id="relationBtns">
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hilighted Texts and Tags</h5>
+
+                                            <div class="col-sm-12 m-1" id="annotationBtns">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Related Sections and Courtcase</h5>
+                                            <div class="col-sm-12 m-1" id="relatedSectionBtns"></div>
+                                            <div class="col-sm-12 m-1" id="courtCasePageNumberBtns"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hilighted Text with Relations </h5>
+                                            <div class="col-sm-12 m-1" id="annotationBtnsRelations">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Operational Relations</h5>
+                                            <div class="col-sm-12 m-1" id="relationBtns"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
-                            <br />
+                            <!--end of buttons display-->
 
                             <div class="row">
                                 <label>Analysis</label>
@@ -445,7 +472,7 @@
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
             // On created annotation add a button with selected text for IRAC Analysis processing.
-            var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
+            var selectedAnnotationText = '{' + annotation.target.selector[0].exact + '[' + annotation.body[0].value + ']}';
 
             var annotationBtnDiv = document.getElementById('annotationBtns');
 
@@ -498,12 +525,12 @@
             var target2 = annotation.target[1].id;
 
             var object1 = highlitedObject.find(obj => obj.id === target1);
-            word1 = object1.target.selector[0].exact + '{' + object1.body[0].value + '}';
+            word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + '] ';
 
             var object2 = highlitedObject.find(obj => obj.id === target2);
-            word2 = object2.target.selector[0].exact + '{' + object1.body[0].value + '}';
+            word2 = object2.target.selector[0].exact + '[' + object1.body[0].value + ']  ';
 
-            var finalRelation = '([' + word1 + ']' + '[' + relation + ']' + '[' + word2 + '])'
+            var finalRelation = ' { (' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ') } '
 
             //console.log(finalRelation);
 

@@ -66,13 +66,13 @@ function changeScenarioText(scenario) {
 function createRelationButtons() {
     // Const relation.
     const relationData = [
-        { name: ' IF  ELSE  ', text: 'IF ..... ELSE ....' },
-        { name: ' IF  THEN ', text: 'IF ..... THEN ....' },
-        { name: ' ONLY IF ', text: 'ONLY IF' },
-        { name: ' AND ', text: 'AND' },
-        { name: ' OR ', text: 'OR' },
-        { name: ' HOWEVER ', text: 'HOWEVER' },
-        { name: ' NOT', text: 'NOT' },
+        { name: ' { IF  ELSE  }', text: '{ IF......ELSE......  } ' },
+        { name: ' { IF  THEN }', text: '{ IF ..... THEN .... } ' },
+        { name: ' { ONLY IF }', text: '{ ONLY IF......} ' },
+        { name: ' { AND }', text: '{AND}' },
+        { name: ' { OR }', text: '{OR}' },
+        { name: ' { HOWEVER }', text: '{HOWEVER}' },
+        { name: ' { NOT }', text: '{NOT}' },
 
     ];
 
@@ -131,16 +131,16 @@ function saveFile() {
 
     // This variable stores all the data.
     var data =
-        '\r User: ' + Username.innerHTML + ' \r\n ' +
-        'Scenario Id: ' + scenarioID.value + ' \r\n ' +
-        'Selected Text & tag: ' + JSON.stringify(selectText_Tags) + ' \r\n ' +
-        'Issues: ' + issues.value + ' \r\n ' +
-        'sections: ' + selectedSectionOptions + ' \r\n ' +
-        'Related Court Case: ' + relatedCourtCase.value + ' \r\n ' +
-        'Court case page/paragraph num: ' + courtCaseNum.value + ' \r\n ' +
-        'Analysis : ' + analysis.value + ' \r\n ' +
-        'Conclustion: ' + conclusion.value + ' \r\n ' +
-        'Hilighted Objectcs : ' + JSON.stringify(highlitedObject) + '\r\n '
+        '\r { "User" : [' + Username.innerHTML + ']} \r\n ' +
+        '{"Scenario Id" : [' + scenarioID.value + ']}\r\n ' +
+        '{"Selected Text_tag": [' + JSON.stringify(selectText_Tags) + ']} \r\n ' +
+        '{"Issues" : [' + issues.value + ']} \r\n ' +
+        '{"sections" :[' + selectedSectionOptions + ']} \r\n ' +
+        '{"Related Court Case": [' + relatedCourtCase.value + ']} \r\n ' +
+        '{"Court case page/paragraph num": [' + courtCaseNum.value + ']} \r\n ' +
+        '{"Analysis": [' + analysis.value + ']} \r\n ' +
+        '{"Conclustion": [' + conclusion.value + ']} \r\n\n\n ' +
+        '{"Hilighted Objectcs": \n [' + JSON.stringify(highlitedObject) + ']}\r\n '
         ;
 
     console.log(data);
@@ -195,7 +195,7 @@ function generateCourtCasePageNumberBtn() {
     }
 
     // Merge the court case and page number text into one text.
-    var mergedCourtCasePageNumberText = relatedCourtCaseField.value + '[' + relatedCourtCaseNumField.value + ']';
+    var mergedCourtCasePageNumberText = '{'+ relatedCourtCaseField.value + '[' + relatedCourtCaseNumField.value + ']'+'}';
 
     // Get courtCasePageNumberBtns div id.
     var courtCasePageNumberBtnsDiv = document.getElementById('courtCasePageNumberBtns');
@@ -263,7 +263,7 @@ function generateRelatedSectionsBtn() {
         button.type = 'button';
         button.className = 'btn btn-outline-secondary';
 
-        let mergedText = 'Section ' + value;
+        let mergedText = '{'+'Section ' + value + '}';
 
         // Id will be the relationName + 'Btn'.
         // Ex.Selected IfElse => The button id is 'IfElseBtn'.
@@ -302,7 +302,6 @@ function generateRelatedSectionsBtn() {
 // Function to check if the the generate court case page number(CCPN) button is disabled.
 function checkDisabledCCPN() {
     var relatedCourtCaseField = document.getElementById('relatedCourtCase');
-    var relatedCourtCaseNumField = document.getElementById('courtCase_Num');
 
     if (relatedCourtCaseField.value == null || relatedCourtCaseField.value == ''
         ) {

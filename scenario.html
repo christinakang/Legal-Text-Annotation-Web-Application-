@@ -81,13 +81,6 @@
                 </a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="LegalConcept.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Legal Concepts</span>
-                </a>
-            </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -157,20 +150,33 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Annotation </h1>
 
-                    <div class="card shadow mb-4">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Legal Concept</th>
-                                        <th>Related topic</th>
-                                        <th>Related section</th>
-                                        <th>Other</th>
-                                    </tr>
-                                </thead>
-                            </table>
+                    <p>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Legal Concepts</a>
+                        
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Legal Concept</th>
+                                                <th>Related topic</th>
+                                                <th>Related section</th>
+                                                <th>Other</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
+                       
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        
                     </div>
                     <!-- Basic Card Example -->
                     <div class="card shadow mb-4">
@@ -283,71 +289,105 @@
                                         </optgroup>
                                     </select>
                                 </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Generate related sections button</button>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="inputText2" class="col-sm-36 col-form-label">Related court case</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="relatedCourtCase">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="inputText2" class="col-sm-10 col-form-label">Paragraph/Page number</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="courtCase_Num">
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" value="Save data to file" onclick="generateCourtCasePageNumberBtn()" disabled>Generate court case/page number button</button>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <label class="col-sm-12 col-form-label">Highlighted Text and Tag</label>
-                                <div class="col-sm-12 m-1" id="annotationBtns">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label class="col-sm-12 col-form-label">Related sections</label>
-                                <div class="col-sm-12 m-1" id="relatedSectionBtns">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label class="col-sm-12 col-form-label">Related court case[Paragraph/page number]</label>
-                                <div class="col-sm-12 m-1" id="courtCasePageNumberBtns">
+                                <div class="col-sm-2">
+                                    <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Update Slection</button>
                                 </div>
                             </div>
 
-                            <br />
+
+                            <!--Related court case and page number row-->
+
                             <div class="row">
-                                <label class="col-sm-12 col-form-label">Relations</label>
-                                <div class="col-sm-12" id="relationBtns">
+                                <div class="col-sm-6">
+                                    <label for="inputText2" class="col-form-label">Related court case</label>
+
+                                    <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="relatedCourtCase">
+
                                 </div>
+                                <div class="col-sm-4">
+                                    <label for="inputText2" class="col-form-label">Paragraph/Page number</label>
+
+                                    <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="courtCase_Num">
+
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="inputText2" class="col-form-label">Confirm Courtcase </label>
+                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" value="Save data to file" onclick="generateCourtCasePageNumberBtn()" disabled>Update</button>
+                                </div>
+
+
                             </div>
                             <br />
+
+
+                            <!--Buttons display-->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hilighted Texts and Tags</h5>
+
+                                            <div class="col-sm-12 m-1" id="annotationBtns">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Related Sections and Courtcase</h5>
+                                            <div class="col-sm-12 m-1" id="relatedSectionBtns"></div>
+                                            <div class="col-sm-12 m-1" id="courtCasePageNumberBtns"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div></div>
+
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hilighted Text with Relations </h5>
+                                            <div class="col-sm-12 m-1" id="annotationBtnsRelations">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Operational Relations</h5>
+                                            <div class="col-sm-12 m-1" id="relationBtns"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!--end of buttons display-->
 
                             <div class="row">
                                 <label>Analysis</label>
-                                <textarea class="form-control" placeholder="Analysis here" id="analysisTextArea" style="height: 100px;"></textarea>
+                                <textarea class="form-control" placeholder="Analysis here" id="analysisTextArea" style="height: 200px;"></textarea>
                             </div>
                             <br />
+
 
                             <div class="row">
                                 <label for="inputText3" class="col-sm-2 col-form-label">Conclusion</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="conclusion" style="height: 100px;">
+
+
                                 </div>
                             </div>
+                            <br />
+
+
                             <br />
 
                             <!--Add a button to save the data.-->
@@ -439,7 +479,7 @@
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
             // On created annotation add a button with selected text for IRAC Analysis processing.
-            var selectedAnnotationText = annotation.target.selector[0].exact + '{' + annotation.body[0].value + '}';
+            var selectedAnnotationText = '{'+ annotation.target.selector[0].exact + '[' + annotation.body[0].value + ']}';
 
             var annotationBtnDiv = document.getElementById('annotationBtns');
 
@@ -492,16 +532,16 @@
             var target2 = annotation.target[1].id;
 
             var object1 = highlitedObject.find(obj => obj.id === target1);
-            word1 = object1.target.selector[0].exact + '{' + object1.body[0].value + '}';
+            word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + '] ';
 
             var object2 = highlitedObject.find(obj => obj.id === target2);
-            word2 = object2.target.selector[0].exact + '{' + object1.body[0].value + '}';
+            word2 = object2.target.selector[0].exact + '[' + object1.body[0].value + ']  ';
 
-            var finalRelation = '(['+ word1 +']'+'['+relation+']'+'['+word2+'])'
+            var finalRelation = ' { ('+ word1 +')'+' ('+relation+') '+'('+word2+') } '
 
             //console.log(finalRelation);
 
-            var annotationBtnDiv = document.getElementById('annotationBtns');
+            var annotationBtnDiv = document.getElementById('annotationBtnsRelations');
 
             // Create button element.
             var button = document.createElement('button');
