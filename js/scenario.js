@@ -133,12 +133,12 @@ function saveFile() {
  
 
     var data_json = {
-        "User": [Username.innerHTML],
-        "ScenarioID": [scenarioID.value],
+        "User": Username.innerHTML,
+        "ScenarioID": scenarioID.value,
         "Text_Tag": selectText_Tags,
         "Issues": issues.value,
         "Sections": selectedSectionOptions,
-        "RelatedCourtCase_pageNum": relatedCourtCase.value + '[' + courtCaseNum.value + ']',
+        "RelatedCourtCase_pageNum": relatedCourtCase.value + '(' + courtCaseNum.value + ')',
         "Analysis": analysis.value,
         "Conclusion":conclusion.value
         
