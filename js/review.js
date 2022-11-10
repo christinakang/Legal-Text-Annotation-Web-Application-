@@ -106,7 +106,7 @@
 
         console.log(sections_selec);
 
-        $('#selectedSections').selectpicker('val', sections_selec);
+        //$('#selectedSections').selectpicker('val', sections_selec);
 
         courtCase = data_json.RelatedCourtCase_pageNum;
         //console.log(courtCase);

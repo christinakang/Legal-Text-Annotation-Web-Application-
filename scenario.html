@@ -419,6 +419,7 @@
 <!--Script to handle annotation of scenarios and auto button creation for highlighted text.-->
 <script type="text/javascript">
     var selectedAnnotation = [];
+    var selectedRelations = [];
     var highlitedObject = [];
 </script>
 <script type="text/javascript">
@@ -531,12 +532,14 @@
             var target2 = annotation.target[1].id;
 
             var object1 = highlitedObject.find(obj => obj.id === target1);
-            word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + '] ';
+            word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + ']';
 
             var object2 = highlitedObject.find(obj => obj.id === target2);
-            word2 = object2.target.selector[0].exact + '[' + object1.body[0].value + ']  ';
+            word2 = object2.target.selector[0].exact + '[' + object2.body[0].value + ']';
 
-            var finalRelation = ' { (' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ') } '
+            var finalRelation = ' {(' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ')} ';
+
+            selectedRelations.push(finalRelation)
 
             //console.log(finalRelation);
 

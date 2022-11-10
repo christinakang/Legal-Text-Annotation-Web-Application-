@@ -1,11 +1,0 @@
- User: admin 
- Scenario Id: 1 
- Selected Text & tag: [{"selectedText":"1 November","selectedTag":"Offer Date"},{"selectedText":"called on Hussain","selectedTag":"communication of offer"},{"selectedText":"'I revoke my offer to yo","selectedTag":"Revoke offer"}] 
- Issues: Whether Ahmad revoke the offer although Hussain has sent out the acceptance letter? 
- sections: 4.2,4.2a 
- Related Court Case: Ignatius v Bell (1913) 2 FMLSR 115  
- Court case page/paragraph num: 20 
- Analysis : In S.4(2)(a) Contracts Act 1950, it provides that the person making the offer (offeror) is bound when the letter of acceptance has been posted irrespective of whether it has been delayed or lost in the course of transit. If Ahmad had revoked the offer by way of telephone, then this revocation would not take place as he had received the letter of acceptance from Hussain.  
- Conclustion: Therefore, Ahmad cannot revoke his offer as he is bound in law to accept the letter of acceptance once it has been posted.   
- Hilighted Objectcs : [{"@context":"http://www.w3.org/ns/anno.jsonld","type":"Annotation","body":[{"type":"TextualBody","purpose":"tagging","value":"Offer Date"}],"target":{"selector":[{"type":"TextQuoteSelector","exact":"1 November"},{"type":"TextPositionSelector","start":3,"end":13}]},"id":"#0ba12ff6-ae62-40a4-be4c-a5272575674d"},{"@context":"http://www.w3.org/ns/anno.jsonld","type":"Annotation","body":[{"type":"TextualBody","value":"communication of offer","purpose":"tagging"}],"target":{"selector":[{"type":"TextQuoteSelector","exact":"called on Hussain"},{"type":"TextPositionSelector","start":52,"end":69}]},"id":"#4ca0bdc9-0366-4783-a412-e20b7e0248c8"},{"@context":"http://www.w3.org/ns/anno.jsonld","type":"Annotation","id":"#703bd452-aead-4b99-9d0e-04220fc95b38","body":[{"type":"TextualBody","value":"makeOffer","purpose":"tagging"}],"target":[{"id":"#0ba12ff6-ae62-40a4-be4c-a5272575674d"},{"id":"#4ca0bdc9-0366-4783-a412-e20b7e0248c8"}],"motivation":"linking"},{"@context":"http://www.w3.org/ns/anno.jsonld","type":"Annotation","body":[{"type":"TextualBody","value":"Revoke offer","purpose":"tagging"}],"target":{"selector":[{"type":"TextQuoteSelector","exact":"'I revoke my offer to yo"},{"type":"TextPositionSelector","start":387,"end":411}]},"id":"#ab906c9c-46ff-4b2e-8894-dec4301ffd8c"}]
- 
