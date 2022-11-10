@@ -71,14 +71,14 @@
 
     // Display file content
     function drawData(data) {
-        const lines = data.split(`\r\n`);
+       // const lines = data.split(`\r\n`);
         /*let str = '';
         lines.forEach(function (line) {
             str += `${line} <br>`;
         });*/
 
         //put the read content into the scenario
-
+        /*
         tmp = lines[1].split(':');
         //console.log(tmp);
         scenarioID = tmp[1];
@@ -124,9 +124,13 @@
         tmp = lines[9].split(':');
         object = tmp[1];
         console.log(object);
-        
+        */
 
         //output.innerHTML = str;
+
+        data_json = JSON.parse(data);
+        console.log(data_json);
+
     }
 });
 /*
