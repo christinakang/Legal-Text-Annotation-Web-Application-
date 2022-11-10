@@ -47,7 +47,7 @@
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
 
-    <title>Scenario Review </title>
+    <title>Scenario</title>
 </head>
 
 <body id="page-top" onload=init()>
@@ -153,7 +153,6 @@
                         <label for="myfile">Select a file:</label>
                         <input type="file" name="userFileData" id="usersFileData" accept=".csv,.txt,.docx,.xlsx">
                     </div>
-
                     <p>
                         <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Legal Concepts</a>
 
@@ -178,7 +177,10 @@
                         </div>
 
                     </div>
-                </div>
+
+                    <div class="card shadow mb-4">
+
+                    </div>
                     <!-- Basic Card Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -214,7 +216,7 @@
                         <!-- General Form Elements -->
                         <form>
                             <div class="row">
-                                <label for="inputText" class="col-sm-3 col-form-label">Issues</label>
+                                <label for="inputText" class="col-sm-4 col-form-label">Issues</label>
                                 <div class="col-sm-8">
                                     <input id="issues" type="text" class="form-control">
                                 </div>
@@ -223,8 +225,8 @@
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Select Related sections </label>
-                                <div class="col-sm-8">
-                                    <select id="selectedSections" onchange="checkDisabledRS()" multiple="multiple" class="col-sm-8">
+                                <div class="col-sm-7">
+                                    <select id="selectedSections" onchange="checkDisabledRS()" multiple="multiple">
                                         <optgroup label="Section 1">
                                             <option value="1.1">Section 1.1</option>
                                             <option value="1.2">Section 1.2</option>
@@ -290,35 +292,37 @@
                                         </optgroup>
                                     </select>
                                 </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Generate related sections button</button>
+                                <div class="col-sm-2">
+                                    <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Update Slection</button>
                                 </div>
                             </div>
-                            <br />
+
+
+                            <!--Related court case and page number row-->
+
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="inputText2" class="col-sm-36 col-form-label">Related court case</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="relatedCourtCase">
-                                    </div>
+                                    <label for="inputText2" class="col-form-label">Related court case</label>
+
+                                    <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="relatedCourtCase">
+
                                 </div>
-                                <div class="col-sm-6">
-                                    <label for="inputText2" class="col-sm-10 col-form-label">Paragraph/Page number</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="courtCase_Num">
-                                    </div>
+                                <div class="col-sm-4">
+                                    <label for="inputText2" class="col-form-label">Paragraph/Page number</label>
+
+                                    <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="courtCase_Num">
+
                                 </div>
+
+                                <div class="col-md-2">
+                                    <label for="inputText2" class="col-form-label">Confirm Courtcase </label>
+                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" value="Save data to file" onclick="generateCourtCasePageNumberBtn()" disabled>Update Courtcase</button>
+                                </div>
+
+
                             </div>
                             <br />
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" value="Save data to file" onclick="generateCourtCasePageNumberBtn()" disabled>Generate court case/page number button</button>
-                                </div>
-                            </div>
-                            <br />
+
 
                             <!--Buttons display-->
 
@@ -343,6 +347,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div></div>
 
                                 <div class="col-sm-6">
                                     <div class="card">
@@ -373,6 +379,7 @@
                             </div>
                             <br />
 
+
                             <div class="row">
                                 <label for="inputText3" class="col-sm-2 col-form-label">Conclusion</label>
                                 <div class="col-sm-10">
@@ -381,6 +388,9 @@
 
                                 </div>
                             </div>
+                            <br />
+
+
                             <br />
 
                             <!--Add a button to save the data.-->
@@ -442,7 +452,7 @@
         widgets: [
             { widget: 'TAG', vocabulary: legalConceptList /*Set selectable vocabulary as legalConceptList.*/ }
         ],
-        relationVocabulary: ['isRelated', 'isPartOf', 'isSameAs ']
+        relationVocabulary: ['belongTo', 'relatedTo', 'PartOf']
     });
 
     // Switch annotation mode (annotation/relationships).
@@ -534,13 +544,13 @@
 
             //console.log(finalRelation);
 
-            var annotationBtnDiv = document.getElementById('annotationBtns');
+            var annotationBtnDiv = document.getElementById('annotationBtnsRelations');
 
             // Create button element.
             var button = document.createElement('button');
 
             button.type = 'button';
-            button.className = 'btn btn-outline-info';
+            button.className = 'btn btn-outline-success';
 
             // Id will be the selectedAnnotationText + 'Btn'.
             // Ex.Selected legal => The button id is 'legalBtn'.
@@ -567,7 +577,7 @@
 
                 // Insert text at cursor position.
                 $('#analysisTextArea').val(
-                    analysisTextAreaValue.slice(0, curPos) + selectedAnnotationText + analysisTextAreaValue.slice(curPos));
+                    analysisTextAreaValue.slice(0, curPos) + finalRelation + analysisTextAreaValue.slice(curPos));
 
                 // Restore cursor position to end of analysis text area after clicking on button.
                 analysisTextArea.focus();
