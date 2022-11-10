@@ -46,6 +46,7 @@
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
 
+
     <title>Scenario</title>
 </head>
 
@@ -99,8 +100,6 @@
             </div>
         </ul>
         <!-- End of Sidebar -->
-
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -152,7 +151,7 @@
 
                     <p>
                         <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Legal Concepts</a>
-                        
+
                     </p>
                     <div class="row">
                         <div class="col">
@@ -172,11 +171,11 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
 
                     <div class="card shadow mb-4">
-                        
+
                     </div>
                     <!-- Basic Card Example -->
                     <div class="card shadow mb-4">
@@ -401,11 +400,11 @@
                     </div>
                     <!-- /.container-fluid -->
                     <!--<div class="col-sm-12">
-        <button class="btn btn-success btn-icon-split">ADD IRAC</button>
-    </div> -->
+                        <button class="btn btn-success btn-icon-split">ADD IRAC</button>
+                    </div> -->
                 </div>
-    <!-- End of Main Content -->
-                </div>
+                <!-- End of Main Content -->
+            </div>
             <!-- End of Content Wrapper -->
         </div>
     </div>
@@ -479,7 +478,7 @@
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
             // On created annotation add a button with selected text for IRAC Analysis processing.
-            var selectedAnnotationText = '{'+ annotation.target.selector[0].exact + '[' + annotation.body[0].value + ']}';
+            var selectedAnnotationText = '{' + annotation.target.selector[0].exact + '[' + annotation.body[0].value + ']}';
 
             var annotationBtnDiv = document.getElementById('annotationBtns');
 
@@ -537,7 +536,7 @@
             var object2 = highlitedObject.find(obj => obj.id === target2);
             word2 = object2.target.selector[0].exact + '[' + object1.body[0].value + ']  ';
 
-            var finalRelation = ' { ('+ word1 +')'+' ('+relation+') '+'('+word2+') } '
+            var finalRelation = ' { (' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ') } '
 
             //console.log(finalRelation);
 
@@ -598,3 +597,5 @@
         });
     });
 </script>
+
+

@@ -119,7 +119,7 @@ function createRelationButtons() {
 
 function saveFile() {
     // Get the data from each element on the form.
-    var selectText_Tags = selectedAnnotation;
+    var selectText_Tags = highlitedObject;
     var Username = document.getElementById('userDisplay');
     var scenarioID = document.getElementById('scenarioSelect');
     var issues = document.getElementById('issues');
@@ -130,20 +130,23 @@ function saveFile() {
     var selectedSectionOptions = $('#selectedSections').val();
 
     // This variable stores all the data.
-    var data =
-        '\r { "User" : [' + Username.innerHTML + ']} \r\n ' +
-        '{"Scenario Id" : [' + scenarioID.value + ']}\r\n ' +
-        '{"Selected Text_tag": [' + JSON.stringify(selectText_Tags) + ']} \r\n ' +
-        '{"Issues" : [' + issues.value + ']} \r\n ' +
-        '{"sections" :[' + selectedSectionOptions + ']} \r\n ' +
-        '{"Related Court Case": [' + relatedCourtCase.value + ']} \r\n ' +
-        '{"Court case page/paragraph num": [' + courtCaseNum.value + ']} \r\n ' +
-        '{"Analysis": [' + analysis.value + ']} \r\n ' +
-        '{"Conclustion": [' + conclusion.value + ']} \r\n\n\n ' +
-        '{"Hilighted Objectcs": \n [' + JSON.stringify(highlitedObject) + ']}\r\n '
-        ;
+ 
 
-    console.log(data);
+    var data_json = {
+        "User": [Username.innerHTML],
+        "ScenarioID": [scenarioID.value],
+        "Text_Tag": selectText_Tags,
+        "Issues": issues.value,
+        "Sections": selectedSectionOptions,
+        "RelatedCourtCase_pageNum": relatedCourtCase.value + '[' + courtCaseNum.value + ']',
+        "Analysis": analysis.value,
+        "Conclusion":conclusion.value
+        
+    };
+
+    var data = JSON.stringify(data_json);
+
+    console.log(data_json);
     var currentdate = new Date();
     var date = currentdate.getDate() + "_" + (currentdate.getMonth() + 1) + "_" +
         currentdate.getHours() + currentdate.getMinutes();
@@ -158,6 +161,9 @@ function saveFile() {
     file.click();
     file.remove();
     URL.revokeObjectURL(url);
+
+
+
 }
 
 function displayUser() {
