@@ -131,6 +131,26 @@
         data_json = JSON.parse(data);
         console.log(data_json);
 
+
+        scenarioID = data_json.scenarioID;
+        console.log(scenarioID);
+        $.each(scenarioList, function (index, value) {
+            if (value.id == scenarioID) {
+                changeScenarioText(value);
+            }
+        });
+
+        document.getElementById("scenarioSelect").value = scenarioID;
+
+
+        selectedAnnotation.push(data_json.Text_Tag);
+
+        issues = data_json.issues;
+        document.getElementById("issues").value = issues;
+
+
+
+
     }
 });
 /*
