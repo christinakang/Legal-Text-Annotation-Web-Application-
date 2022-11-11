@@ -100,12 +100,12 @@
 
         courtCase = data_json.RelatedCourtCase_pageNum;
         //console.log(courtCase);
-        var tmp = JSON.stringify(courtCase).split('(');
+        var tmp = JSON.stringify(courtCase).split('[');
         //console.log(tmp);
 
         document.getElementById("relatedCourtCase").value = tmp[0].replace('"','');
         var num = tmp[1].replace('[','');
-        num = num.replace(')','');
+        num = num.replace(']','');
         num = num.replace('"','');
         document.getElementById("courtCase_Num").value = num;
 

@@ -142,7 +142,7 @@ function saveFile() {
         "Selected_Relations": selectedRelations,
         "Issues": issues.value,
         "Sections": selectedSectionOptions,
-        "RelatedCourtCase_pageNum": relatedCourtCase.value + '(' + courtCaseNum.value + ')',
+        "RelatedCourtCase_pageNum": relatedCourtCase.value + '[' + courtCaseNum.value + ']',
         "Analysis": analysis.value,
         "Conclusion": conclusion.value,
         "Original_Objects": highlitedObject
