@@ -139,13 +139,13 @@ function saveFile() {
         "ScenarioID": scenarioID.value,
 
         "Text_Tags": selectedAnnotation,
-        "Selected Relations": selectedRelations,
+        "Selected_Relations": selectedRelations,
         "Issues": issues.value,
         "Sections": selectedSectionOptions,
         "RelatedCourtCase_pageNum": relatedCourtCase.value + '(' + courtCaseNum.value + ')',
         "Analysis": analysis.value,
         "Conclusion": conclusion.value,
-        "Original Objects": selectText_Tags
+        "Original_Objects": highlitedObject
         
     };
 

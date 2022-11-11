@@ -86,36 +86,26 @@
 
 
         //add tags and relations
-        selectedAnnotation.push(data_json.Text_Tag);
-        highlitedObject.push(data_json.Text_Tag);
-        updateHilight(highlitedObject);
+        object = data_json.Original_Objects;
+        //console.log('object');
+        //console.log(object);
+        selectedAnnotation.push(object);
+        highlitedObject.push(object);
+        updateHilight(selectedAnnotation);
 
         issues = data_json.Issues;
         document.getElementById("issues").value = issues;
-
-        sections = data_json.Sections;
-
-        //console.log(sections);
-        options = Array.from(document.querySelectorAll('#selectedSections option'));
-
-        sections_selec =[];
-        $.each(sections, function(i){
-               // $("#strings option[value='" + e + "']").prop("selected", true);
-               sections_selec.push(sections[i]);
-        });
-
-        console.log(sections_selec);
 
         //$('#selectedSections').selectpicker('val', sections_selec);
 
         courtCase = data_json.RelatedCourtCase_pageNum;
         //console.log(courtCase);
-        var tmp = JSON.stringify(courtCase).split(' ');
+        var tmp = JSON.stringify(courtCase).split('(');
         //console.log(tmp);
 
         document.getElementById("relatedCourtCase").value = tmp[0].replace('"','');
         var num = tmp[1].replace('[','');
-        num = num.replace(']','');
+        num = num.replace(')','');
         num = num.replace('"','');
         document.getElementById("courtCase_Num").value = num;
 
@@ -160,10 +150,10 @@ function changeScenarioText(scenario) {
 
 function updateHilight(object){
 
- object.forEach(item => {
-      for (let i = 0; i < object.keys(item).length; i++) {
+    object.forEach(item => {
+      for (let i = 0; i < Object.keys(item).length; i++) {
         annotation = item[i];
-        console.log(i);
+        console.log(annotation);
           if (annotation.motivation == null && annotation.motivation != 'linking') {
             //console.log('no linking');
             selectedAnnotation.push({selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
