@@ -72,7 +72,11 @@ function createRelationButtons() {
         { name: ' { AND }', text: '{AND}' },
         { name: ' { OR }', text: '{OR}' },
         { name: ' { HOWEVER }', text: '{HOWEVER}' },
-        { name: ' { NOT }', text: '{NOT}' },
+        { name: ' { SIMPLE PATTERN }', text: '{SIMPLE PATTERN}' },
+        { name: ' { COMMON SENSE }', text: '{COMMON SENSE}' },
+        { name: ' { LOGIC }', text: '{LOGIC}' },
+        { name: ' { CO-REFERENCE }', text: '{CO-REFERENCE}' },
+
 
     ];
 
