@@ -18,6 +18,7 @@ function init() {
     createRelationButtons();
     displayUser();
     getLegalConcepts();
+    createReasonButtons();
 }
 
 // The the list of scenarios available in the database.
@@ -72,12 +73,6 @@ function createRelationButtons() {
         { name: ' { AND }', text: '{AND}' },
         { name: ' { OR }', text: '{OR}' },
         { name: ' { HOWEVER }', text: '{HOWEVER}' },
-        { name: ' { SIMPLE PATTERN }', text: '{SIMPLE PATTERN}' },
-        { name: ' { COMMON SENSE }', text: '{COMMON SENSE}' },
-        { name: ' { LOGIC }', text: '{LOGIC}' },
-        { name: ' { CO-REFERENCE }', text: '{CO-REFERENCE}' },
-
-
     ];
 
     // Get relation btn div id.
@@ -89,6 +84,55 @@ function createRelationButtons() {
 
         button.type = 'button';
         button.className = 'btn btn-outline-info';
+
+        // Id will be the relationName + 'Btn'.
+        // Ex.Selected IfElse => The button id is 'IfElseBtn'.
+        // It is case senstive and also will take in spaces.
+        button.id = value.name + 'Btn';
+
+        // Add text to be displayed on button.
+        button.innerHTML = value.name;
+
+        // Add onClick event to add the selected relation to analysis text area at the cursor.
+        button.addEventListener('click', function (event) {
+            // Get current position of cursor at analysis text area.
+            // If no cursor, it will append at the end of the textArea's text.
+            var analysisTxtBox = document.getElementById('analysisTextArea');
+            let curPos = analysisTxtBox.selectionStart;
+
+            // Get current text in analysisTextArea.
+            var analysisTextAreaValue = $('#analysisTextArea').val();
+
+            // Insert text at cursor position.
+            $('#analysisTextArea').val(
+                analysisTextAreaValue.slice(0, curPos) + value.text + analysisTextAreaValue.slice(curPos));
+
+            // Restore cursor position to end of analysis text area after clicking on button.
+            analysisTextArea.focus();
+        });
+
+        // Append the  button to annotation div.
+        relationBtnDiv.appendChild(button);
+    });
+}
+
+function createReasonButtons() {
+    // Const relation.
+    const relationData = [
+        { name: ' { LEGALLIZATION}', text: '{LEGALLIZATION}' },
+        { name: ' { COMMON_SENSE }', text: '{COMMON_SENSE}' },
+        { name: ' { CO-REFERENCE }', text: '{CO-REFERENCE}' },
+    ];
+
+    // Get relation btn div id.
+    var relationBtnDiv = document.getElementById('reasonBtns');
+
+    $.each(relationData, function (index, value) {
+        // Create button element.
+        var button = document.createElement('button');
+
+        button.type = 'button';
+        button.className = 'btn btn-outline-primary';
 
         // Id will be the relationName + 'Btn'.
         // Ex.Selected IfElse => The button id is 'IfElseBtn'.
