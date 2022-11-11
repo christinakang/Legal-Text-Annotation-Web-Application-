@@ -161,7 +161,7 @@ function changeScenarioText(scenario) {
 function updateHilight(object){
 
  object.forEach(item => {
-      for (let i = 0; i < Object.keys(item).length; i++) {
+      for (let i = 0; i < object.keys(item).length; i++) {
         annotation = item[i];
         console.log(i);
           if (annotation.motivation == null && annotation.motivation != 'linking') {
