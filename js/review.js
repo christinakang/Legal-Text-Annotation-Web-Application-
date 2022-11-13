@@ -74,7 +74,7 @@
         data_json = JSON.parse(data);
         console.log(data_json);
 
-        scenarioID = data_json.ScenarioID;
+        let scenarioID = data_json.ScenarioID;
         //console.log(data_json.ScenarioID);
         $.each(scenarioList, function (index, value) {
             if (value.id == scenarioID) {
@@ -96,8 +96,12 @@
         // Update the annotation buttons.
         updateAnnotationButtons(object);
 
-        issues = data_json.Issues;
+        let issues = data_json.Issues;
         document.getElementById("issues").value = issues;
+
+        let sections = data_json.Sections;
+        console.log(sections);
+        restoreRelatedSectionsBtn(sections);
 
         //$('#selectedSections').selectpicker('val', sections_selec);
 
@@ -113,6 +117,9 @@
         document.getElementById("courtCase_Num").value = num;
 
         generateCourtCasePageNumberBtn();
+
+        // Check generate court case btn validity.
+        checkDisabledCCPN();
 
         anlysis = data_json.Analysis;
         document.getElementById("analysisTextArea").value = anlysis;
@@ -199,7 +206,6 @@ function updateAnnotationButtons(annotations) {
 
             // Append the  button to annotation div.
             annotationBtnDiv.appendChild(button);
-
         }
         else {
             //capture relation tagging
@@ -263,60 +269,9 @@ function updateAnnotationButtons(annotations) {
     });
 }
 
-function generateCourtCasePageNumberBtn() {
-    // If either field is null, do not create button.
-    var relatedCourtCaseField = document.getElementById('relatedCourtCase');
-    var relatedCourtCaseNumField = document.getElementById('courtCase_Num');
-
-    // Merge the court case and page number text into one text.
-    var mergedCourtCasePageNumberText = '{' + relatedCourtCaseField.value + '[' + relatedCourtCaseNumField.value + ']' + '}';
-
-    // Get courtCasePageNumberBtns div id.
-    var courtCasePageNumberBtnsDiv = document.getElementById('courtCasePageNumberBtns');
-
-    // Create button element.
-    var button = document.createElement('button');
-
-    button.type = 'button';
-    button.className = 'btn btn-outline-primary';
-
-    // Id will be the relationName + 'Btn'.
-    // Ex.Selected IfElse => The button id is 'IfElseBtn'.
-    // It is case senstive and also will take in spaces.
-    button.id = mergedCourtCasePageNumberText + 'Btn';
-
-    // Add button id to global.
-    courtCasePageNumberId = button.id;
-
-    // Add text to be displayed on button.
-    button.innerHTML = mergedCourtCasePageNumberText;
-
-    // Add onClick event to add the selected relation to analysis text area at the cursor.
-    button.addEventListener('click', function (event) {
-        // Get current position of cursor at analysis text area.
-        // If no cursor, it will append at the end of the textArea's text.
-        var analysisTxtBox = document.getElementById('analysisTextArea');
-        let curPos = analysisTxtBox.selectionStart;
-
-        // Get current text in analysisTextArea.
-        var analysisTextAreaValue = $('#analysisTextArea').val();
-
-        // Insert text at cursor position.
-        $('#analysisTextArea').val(
-            analysisTextAreaValue.slice(0, curPos) + mergedCourtCasePageNumberText + analysisTextAreaValue.slice(curPos));
-
-        // Restore cursor position to end of analysis text area after clicking on button.
-        analysisTextArea.focus();
-    });
-
-    // Append the  button to annotation div.
-    courtCasePageNumberBtnsDiv.appendChild(button);
-}
-
-// Function to generate related sections button.
+// Function to restore related sections selected options and button.
 // Will replace the existing buttons if any.
-// Cannot create if there are no selected related sections(disabled by UI).
-function generateRelatedSectionsBtn() {
+function restoreRelatedSectionsBtn(sections) {
     // remove existing court case page number button id if not null.
     if (relatedSectionBtnIds.length > 0) {
         $.each(relatedSectionBtnIds, function (index, value) {
@@ -324,6 +279,23 @@ function generateRelatedSectionsBtn() {
             elem.parentNode.removeChild(elem);
         });
     }
+
+    // Restore options selected in the view from file.
+    let select = document.getElementById("selectedSections");
+
+    $.each(sections, function (index, value) {
+        for (i = 0; i < select.options.length; i += 1) {
+            if (select.options[i].value === value) {
+                select.options[i].selected = true;
+            }
+        }
+    });
+
+    // Refresh view after setting values to true.
+    $('#selectedSections').multiselect('refresh');
+
+    // Run check for button.
+    checkDisabledRS();
 
     // Get courtCasePageNumberBtns div id.
     var relatedSectionBtnsDiv = document.getElementById('relatedSectionBtns');
