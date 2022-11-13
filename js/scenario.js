@@ -308,6 +308,7 @@ function generateRelatedSectionsBtn() {
             var elem = document.getElementById(value);
             elem.parentNode.removeChild(elem);
         });
+        relatedSectionBtnIds = [];
     }
 
     // Get courtCasePageNumberBtns div id.
