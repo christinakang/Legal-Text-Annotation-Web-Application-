@@ -47,7 +47,7 @@
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
 
-    <title>Scenario</title>
+    <title>Review Annotation</title>
 </head>
 
 <body id="page-top" onload=init()>
@@ -147,7 +147,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Reivew Annotation </h1>
+                    <h1 class="h3 mb-4 text-gray-800">Review Annotation </h1>
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Update File </h6>
                         <label for="myfile">Select a file:</label>
@@ -532,7 +532,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Update Slection</button>
+                                    <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Update Section</button>
                                 </div>
                             </div>
 
@@ -602,8 +602,11 @@
                                 <div class="col-sm-6">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title">Operational Relations</h5>
+                                            <h5 class="card-title">Operational Relations and Reasons</h5>
+                                            <label class="col-form-label">Operational Relations</label>
                                             <div class="col-sm-12 m-1" id="relationBtns"></div>
+                                            <label class="col-form-label">Reason</label>
+                                            <div class="col-sm-12 m-1" id="reasonBtns"></div>
                                         </div>
                                     </div>
                                 </div>

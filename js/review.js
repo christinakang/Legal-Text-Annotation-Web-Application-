@@ -74,7 +74,6 @@
         data_json = JSON.parse(data);
         console.log(data_json);
 
-
         scenarioID = data_json.ScenarioID;
         //console.log(data_json.ScenarioID);
         $.each(scenarioList, function (index, value) {
@@ -84,14 +83,18 @@
         });
         document.getElementById("scenarioSelect").value = scenarioID;
 
-
         //add tags and relations
-        object = data_json.Original_Objects;
+        let object = data_json.Original_Objects;
         //console.log('object');
         //console.log(object);
         selectedAnnotation.push(object);
         highlitedObject.push(object);
-        updateHilight(selectedAnnotation);
+
+        // Set the annotations list.
+        r.setAnnotations(object);
+
+        // Update the annotation buttons.
+        updateAnnotationButtons(object);
 
         issues = data_json.Issues;
         document.getElementById("issues").value = issues;
@@ -103,10 +106,10 @@
         var tmp = JSON.stringify(courtCase).split('[');
         //console.log(tmp);
 
-        document.getElementById("relatedCourtCase").value = tmp[0].replace('"','');
-        var num = tmp[1].replace('[','');
-        num = num.replace(']','');
-        num = num.replace('"','');
+        document.getElementById("relatedCourtCase").value = tmp[0].replace('"', '');
+        var num = tmp[1].replace('[', '');
+        num = num.replace(']', '');
+        num = num.replace('"', '');
         document.getElementById("courtCase_Num").value = num;
 
         generateCourtCasePageNumberBtn();
@@ -116,7 +119,6 @@
 
         conclusion = data_json.Conclusion;
         document.getElementById("conclusion").value = conclusion;
-
     }
 });
 /*
@@ -147,16 +149,12 @@ function changeScenarioText(scenario) {
     scenarioText.innerHTML = scenario.text;
 }
 
+function updateAnnotationButtons(annotations) {
+    $.each(annotations, function (index, annotation) {
+        highlitedObject.push(annotation);
 
-function updateHilight(object){
-
-    object.forEach(item => {
-      for (let i = 0; i < Object.keys(item).length; i++) {
-        annotation = item[i];
-        console.log(annotation);
-          if (annotation.motivation == null && annotation.motivation != 'linking') {
-            //console.log('no linking');
-            selectedAnnotation.push({selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
+        if (annotation.motivation == null && annotation.motivation != 'linking') {
+            selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
             // On created annotation add a button with selected text for IRAC Analysis processing.
             var selectedAnnotationText = '{' + annotation.target.selector[0].exact + '[' + annotation.body[0].value + ']}';
 
@@ -205,19 +203,18 @@ function updateHilight(object){
         }
         else {
             //capture relation tagging
-            //console.log('linking');
-            //console.log(item[i]);
+
             var relation = annotation.body[0].value;
             var target1 = annotation.target[0].id;
             var target2 = annotation.target[1].id;
 
-            var object1 = item.find(obj => obj.id === target1);
-            word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + '] ';
+            var object1 = highlitedObject.find(obj => obj.id === target1);
+            word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + ']';
 
-            var object2 = item.find(obj => obj.id === target2);
-            word2 = object2.target.selector[0].exact + '[' + object1.body[0].value + ']  ';
+            var object2 = highlitedObject.find(obj => obj.id === target2);
+            word2 = object2.target.selector[0].exact + '[' + object2.body[0].value + ']';
 
-            var finalRelation = ' { (' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ') } '
+            var finalRelation = ' {(' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ')} ';
 
             //console.log(finalRelation);
 
@@ -263,10 +260,8 @@ function updateHilight(object){
             // Append the  button to annotation div.
             annotationBtnDiv.appendChild(button);
         };
- }
- });
+    });
 }
-
 
 function generateCourtCasePageNumberBtn() {
     // If either field is null, do not create button.
@@ -274,7 +269,7 @@ function generateCourtCasePageNumberBtn() {
     var relatedCourtCaseNumField = document.getElementById('courtCase_Num');
 
     // Merge the court case and page number text into one text.
-    var mergedCourtCasePageNumberText = '{'+ relatedCourtCaseField.value + '[' + relatedCourtCaseNumField.value + ']'+'}';
+    var mergedCourtCasePageNumberText = '{' + relatedCourtCaseField.value + '[' + relatedCourtCaseNumField.value + ']' + '}';
 
     // Get courtCasePageNumberBtns div id.
     var courtCasePageNumberBtnsDiv = document.getElementById('courtCasePageNumberBtns');
@@ -342,7 +337,7 @@ function generateRelatedSectionsBtn() {
         button.type = 'button';
         button.className = 'btn btn-outline-secondary';
 
-        let mergedText = '{'+'Section ' + value + '}';
+        let mergedText = '{' + 'Section ' + value + '}';
 
         // Id will be the relationName + 'Btn'.
         // Ex.Selected IfElse => The button id is 'IfElseBtn'.
@@ -377,10 +372,3 @@ function generateRelatedSectionsBtn() {
         relatedSectionBtnsDiv.appendChild(button);
     });
 }
-
-
-
-
-
-
-
