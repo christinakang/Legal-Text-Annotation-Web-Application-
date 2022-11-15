@@ -348,9 +348,8 @@ function addCourtCase() {
     // Increase court case global count.
     currentCourtCaseCount++;
 
-    // Insert a new court case block into innerHTML of courtCaseView.
-    courtCaseView.innerHTML +=
-        /*('<option value="' + value.id + '">' + value.id + '</option>\n');*/
+    let newCourtCaseInput = document.createElement('span');
+    newCourtCaseInput.innerHTML =
         ('<div class="row" id="courtCase_' + currentCourtCaseCount + '" style="margin-bottom: 10px;">'
             + '<div class="col-sm-2">'
             + '<label class="col-form-label">#' + currentCourtCaseCount + '</label>'
@@ -364,6 +363,7 @@ function addCourtCase() {
             + '<div class="col-sm-2">'
             + '</div>'
             + '</div>');
+    courtCaseView.appendChild(newCourtCaseInput);
 }
 
 function removeCourtCase() {

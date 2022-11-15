@@ -135,21 +135,22 @@
             // Skip insert if its 1 since it already exists.
             if (i != 1) {
                 // Insert a new court case block into innerHTML of courtCaseView.
-                courtCaseView.innerHTML +=
-                    /*('<option value="' + value.id + '">' + value.id + '</option>\n');*/
-                    ('<div class="row" id="courtCase_' + i + '" style="margin-bottom: 10px;">'
+                let newCourtCaseInput = document.createElement('span');
+                newCourtCaseInput.innerHTML =
+                    ('<div class="row" id="courtCase_' + courtCasesCount + '" style="margin-bottom: 10px;">'
                         + '<div class="col-sm-2">'
-                        + '<label class="col-form-label">#' + i + '</label>'
+                        + '<label class="col-form-label">#' + courtCasesCount + '</label>'
                         + '</div>'
                         + '<div class="col-sm-4">'
-                        + '<input type="text" class="form-control" id="relatedCourtCase_' + i + '">'
+                        + '<input type="text" class="form-control" id="relatedCourtCase_' + courtCasesCount + '">'
                         + '</div>'
                         + '<div class="col-sm-4">'
-                        + '<input type="text" class="form-control" id="courtCase_Num_' + i + '">'
+                        + '<input type="text" class="form-control" id="courtCase_Num_' + courtCasesCount + '">'
                         + '</div>'
                         + '<div class="col-sm-2">'
                         + '</div>'
                         + '</div>');
+                courtCaseView.appendChild(newCourtCaseInput);
             }
         }
 
