@@ -82,7 +82,6 @@
                 </a>
             </li>
 
-
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="review.html">
@@ -155,7 +154,6 @@
                     </div>
                     <p>
                         <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Legal Concepts</a>
-
                     </p>
                     <div class="row">
                         <div class="col">
@@ -175,11 +173,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="card shadow mb-4">
-
                     </div>
                     <!-- Basic Card Example -->
                     <div class="card shadow mb-4">
@@ -212,11 +208,13 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">IRAC Analysis</h5>
+                        <h3 class="card-title">IRAC Analysis</h3>
                         <!-- General Form Elements -->
                         <form>
                             <div class="row">
-                                <label for="inputText" class="col-sm-4 col-form-label">Issues</label>
+                                <div class="col-sm-4">
+                                    <label for="inputText" class="col-sm-4 col-form-label">Issues</label>
+                                </div>
                                 <div class="col-sm-8">
                                     <input id="issues" type="text" class="form-control">
                                 </div>
@@ -224,8 +222,8 @@
                             <br />
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Select Related sections </label>
-                                <div class="col-sm-7">
+                                <label class="col-sm-4 col-form-label">Select Related sections </label>
+                                <div class="col-sm-8">
                                     <select id="selectedSections" onchange="checkDisabledRS()" multiple="multiple">
                                         <option value="1.1">Section 1.1</option>
                                         <option value="1.2">Section 1.2</option>
@@ -530,38 +528,59 @@
                                         <option value="191a">Section 191a</option>
                                         <option value="191b">Section 191b</option>
                                     </select>
-                                </div>
-                                <div class="col-sm-2">
                                     <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Update Section</button>
                                 </div>
                             </div>
 
-
                             <!--Related court case and page number row-->
 
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="inputText2" class="col-form-label">Related court case</label>
-
-                                    <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="relatedCourtCase">
-
+                                <div class="col-sm-12">
+                                    <h4 class="card-title">Court cases</h4>
                                 </div>
-                                <div class="col-sm-4">
-                                    <label for="inputText2" class="col-form-label">Paragraph/Page number</label>
-
-                                    <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="courtCase_Num">
-
+                                <div class="col-sm-12">
+                                    <button type="button" id="addCourtCaseBtn" class="btn btn-success" onclick="addCourtCase()">Add courtcase <span class="fas fa-plus"></span></button>
+                                    <button type="button" id="removeCourtCaseBtn" class="btn btn-danger" onclick="removeCourtCase()">Remove courtcase <span class="fas fa-trash"></span></button>
+                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" onclick="generateCourtCasePageNumberBtn()">Generate courtcase buttons</button>
                                 </div>
-
-                                <div class="col-md-2">
-                                    <label for="inputText2" class="col-form-label">Confirm Courtcase </label>
-                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" value="Save data to file" onclick="generateCourtCasePageNumberBtn()" disabled>Update Courtcase</button>
-                                </div>
-
-
                             </div>
                             <br />
 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body" id="courtCaseView">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="col-form-label">No.</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="col-form-label">Related court case</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="col-form-label">Paragraph/Page number</label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+                                            </div>
+                                            <div class="row" id="courtCase_1" style="margin-bottom: 10px;">
+                                                <div class="col-sm-2">
+                                                    <label class="col-form-label">#1</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" id="relatedCourtCase_1">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" id="courtCase_Num_1">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
 
                             <!--Buttons display-->
 
@@ -582,7 +601,6 @@
                                             <h5 class="card-title">Related Sections and Courtcase</h5>
                                             <div class="col-sm-12 m-1" id="relatedSectionBtns"></div>
                                             <div class="col-sm-12 m-1" id="courtCasePageNumberBtns"></div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -610,8 +628,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <!--end of buttons display-->
 
@@ -621,17 +637,13 @@
                             </div>
                             <br />
 
-
                             <div class="row">
                                 <label for="inputText3" class="col-sm-2 col-form-label">Conclusion</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="conclusion" style="height: 100px;">
-
-
                                 </div>
                             </div>
                             <br />
-
 
                             <br />
 

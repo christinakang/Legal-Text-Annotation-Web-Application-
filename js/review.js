@@ -74,6 +74,27 @@
         data_json = JSON.parse(data);
         console.log(data_json);
 
+        // Reset important variables to default.
+
+        // Reset courtCases view.
+        for (let i = 1; i <= currentCourtCaseCount; i++) {
+            // Do not allow remove if currentCourtCaseCount is 1.
+            // There must always be one court case available.
+            if (i != 1) {
+                // Get court case id to remove based on global current court case count.
+                let courtCaseId = 'courtCase_' + i;
+
+                // Remove target court case.
+                var elem = document.getElementById(courtCaseId);
+                elem.parentNode.removeChild(elem);
+            }
+        }
+
+        // Reset court cases count.
+        currentCourtCaseCount = 1;
+
+        // End reset important variables to default.
+
         let scenarioID = data_json.ScenarioID;
         //console.log(data_json.ScenarioID);
         $.each(scenarioList, function (index, value) {
@@ -85,8 +106,6 @@
 
         //add tags and relations
         let object = data_json.Original_Objects;
-        //console.log('object');
-        //console.log(object);
         selectedAnnotation.push(object);
         highlitedObject.push(object);
 
@@ -103,23 +122,56 @@
         console.log(sections);
         restoreRelatedSectionsBtn(sections);
 
-        //$('#selectedSections').selectpicker('val', sections_selec);
+        // Handle multiple court cases.
+        let courtCases = data_json.RelatedCourtCase_pageNumList;
+        console.log(courtCases);
 
-        courtCase = data_json.RelatedCourtCase_pageNum;
-        //console.log(courtCase);
-        var tmp = JSON.stringify(courtCase).split('[');
-        //console.log(tmp);
+        let courtCasesCount = courtCases.length;
+        // get view element.
+        let courtCaseView = document.getElementById("courtCaseView");
 
-        document.getElementById("relatedCourtCase").value = tmp[0].replace('"', '');
-        var num = tmp[1].replace('[', '');
-        num = num.replace(']', '');
-        num = num.replace('"', '');
-        document.getElementById("courtCase_Num").value = num;
+        // Insert input fields.
+        for (let i = 1; i <= courtCasesCount; i++) {
+            // Skip insert if its 1 since it already exists.
+            if (i != 1) {
+                // Insert a new court case block into innerHTML of courtCaseView.
+                courtCaseView.innerHTML +=
+                    /*('<option value="' + value.id + '">' + value.id + '</option>\n');*/
+                    ('<div class="row" id="courtCase_' + i + '" style="margin-bottom: 10px;">'
+                        + '<div class="col-sm-2">'
+                        + '<label class="col-form-label">#' + i + '</label>'
+                        + '</div>'
+                        + '<div class="col-sm-4">'
+                        + '<input type="text" class="form-control" id="relatedCourtCase_' + i + '">'
+                        + '</div>'
+                        + '<div class="col-sm-4">'
+                        + '<input type="text" class="form-control" id="courtCase_Num_' + i + '">'
+                        + '</div>'
+                        + '<div class="col-sm-2">'
+                        + '</div>'
+                        + '</div>');
+            }
+        }
 
+        // Insert each value respectively.
+        for (let i = 1; i <= courtCasesCount; i++) {
+            let relatedCourtCase = 'relatedCourtCase_' + i;
+            let courtCaseNum = 'courtCase_Num_' + i;
+
+            let tmp = JSON.stringify(courtCases[i - 1]).split('[');
+
+            document.getElementById(relatedCourtCase).value = tmp[0].replace('"', '');
+            let num = tmp[1].replace('[', '');
+            num = num.replace(']', '');
+            num = num.replace('"', '');
+            document.getElementById(courtCaseNum).value = num;
+        }
+
+        // Set current court case count to the uploaded file court case count.
+        currentCourtCaseCount = courtCasesCount;
+
+        // Generate the court case page number buttons.
         generateCourtCasePageNumberBtn();
-
-        // Check generate court case btn validity.
-        checkDisabledCCPN();
 
         anlysis = data_json.Analysis;
         document.getElementById("analysisTextArea").value = anlysis;
