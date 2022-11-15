@@ -2,15 +2,16 @@
 const scenarioList = [
     { id: 1, text: "On 1 November, Ahmad who lives next door to Hussain called on Hussain and offer to sell his IBM computer for RM2,000 . On 3 November, Hussain wrote and posted a letter to Ahmad accepting the offer. The letter was not addressed properly. Hence Ahmad received the letter of acceptance on 8 November instead of on 5 November. On the evening of 6 November, Ahmad telephoned Hussain and said 'I revoke my offer to you'" },
     { id: 2, text: "'Cathy's son, Dave, aged 21, was studying for a diploma in computer science at a University in Kuala Lumpur. He lived in a student residence. It was a city council legislative requirement that it was illegal to smoke in student residence, offices, shops, or any enclosed place where someone else is residing, studying or working within the campus. Dave gave up smoking due to this requirement.However, Cathy was worried that under the pressure of preparing for the examination Dave would start smoking again, and so she promised to pay Dave RM500 if he did not smoke at all until he had completed the course.She also promised to buy him a car if he passed the examinations.Cathy run an online bookstore, and asked Dave to maintain and update the website from time to time.She was pleased with the result, and said she would give him RM1, 000 'for all his hard work'. Dave passed his examinations, obtained his diploma and moved to live in Johor Bahru where there was no legal requirement on banning of smoking in public enclosed areas.He has not started to smoke again after he left Kuala Lumpur.Cathy has not made either of the promised payments, or bought the car." },
-    {id: 3, text: "Alan needed money quickly. He owned an original 1886 edition of Kidnapped by Robert Louis Stevenson, a book which he advertised in the newspaper for sale for $1000. Cate saw the advertisement.She telephoned Alan, saying that she would buy the book for $1000. Alan, however, replied that he had reconsidered the matter and that he could not sell the book for less than $2000.Cate replied that she would give him $1500. Alan replied that he would only sell the book for $2000 but that he would keep his offer open for seven days.He also said that Cate could fax her acceptance to him if she wanted.The next day Alan sold the book to his friend David because David loved the book so much and because he paid $7000 for it. Two days later Cate decided to purchase the book for Alan's price of $2000.She posted her acceptance to Alan.The next day David told Cate that he had bought a copy of Kidnapped from Alan for $7, 000. Cate rang Alan to confirm that she had accepted his offer.Later that day Alan received Cate's acceptance."}
+    { id: 3, text: "Alan needed money quickly. He owned an original 1886 edition of Kidnapped by Robert Louis Stevenson, a book which he advertised in the newspaper for sale for $1000. Cate saw the advertisement.She telephoned Alan, saying that she would buy the book for $1000. Alan, however, replied that he had reconsidered the matter and that he could not sell the book for less than $2000.Cate replied that she would give him $1500. Alan replied that he would only sell the book for $2000 but that he would keep his offer open for seven days.He also said that Cate could fax her acceptance to him if she wanted.The next day Alan sold the book to his friend David because David loved the book so much and because he paid $7000 for it. Two days later Cate decided to purchase the book for Alan's price of $2000.She posted her acceptance to Alan.The next day David told Cate that he had bought a copy of Kidnapped from Alan for $7, 000. Cate rang Alan to confirm that she had accepted his offer.Later that day Alan received Cate's acceptance." }
 ];
 
-// Store the single courtCasePageNumber button Id.
-// Only one can exist at a time.
-var courtCasePageNumberId = null;
+// Store the courtCasePageNumber button Ids.
+var courtCasePageNumberIds = [];
 
 // Store related section buttons Ids.
 var relatedSectionBtnIds = [];
+
+var currentCourtCaseCount = 1;
 
 // function that runs all necessary initial retrieval.
 function init() {
@@ -172,30 +173,34 @@ function saveFile() {
     var Username = document.getElementById('userDisplay');
     var scenarioID = document.getElementById('scenarioSelect');
     var issues = document.getElementById('issues');
-    var relatedCourtCase = document.getElementById('relatedCourtCase');
-    var courtCaseNum = document.getElementById('courtCase_Num');
     var analysis = document.getElementById('analysisTextArea');
     var conclusion = document.getElementById('conclusion');
     var selectedSectionOptions = $('#selectedSections').val();
 
+    let relatedCourtCasePageNumbers = [];
+    // Get list of filled court case and pg number.
+    for (let i = 1; i <= currentCourtCaseCount; i++) {
+        let relatedCourtCaseId = 'relatedCourtCase_' + i;
+        let courtCaseNumId = 'courtCase_Num_' + i;
+        let relatedCourtCase = document.getElementById(relatedCourtCaseId);
+        let courtCaseNum = document.getElementById(courtCaseNumId);
+
+        relatedCourtCasePageNumbers.push(relatedCourtCase.value + '[' + courtCaseNum.value + ']');
+    }
+
     // This variable stores all the data.
-
-
-    
 
     var data_json = {
         "User": Username.innerHTML,
         "ScenarioID": scenarioID.value,
-
         "Text_Tags": selectedAnnotation,
         "Selected_Relations": selectedRelations,
         "Issues": issues.value,
         "Sections": selectedSectionOptions,
-        "RelatedCourtCase_pageNum": relatedCourtCase.value + '[' + courtCaseNum.value + ']',
+        "RelatedCourtCase_pageNumList": relatedCourtCasePageNumbers,
         "Analysis": analysis.value,
         "Conclusion": conclusion.value,
         "Original_Objects": highlitedObject
-        
     };
 
     var data = JSON.stringify(data_json);
@@ -232,70 +237,6 @@ function removeAllAnnotationBtnIds() {
     });
 }
 
-// Function to generate court case page number button.
-// Will replace the existing button if any.
-// Cannot create a court case page number button if the two affected fields are null or String empty('').
-function generateCourtCasePageNumberBtn() {
-    // If either field is null, do not create button.
-    var relatedCourtCaseField = document.getElementById('relatedCourtCase');
-    if (relatedCourtCaseField.value == null || relatedCourtCaseField.value == '')
-        return;
-
-    var relatedCourtCaseNumField = document.getElementById('courtCase_Num');
-    if (relatedCourtCaseNumField.value == null || relatedCourtCaseField.value == '')
-        return;
-
-    // remove existing court case page number button id if not null.
-    if (courtCasePageNumberId != null) {
-        var elem = document.getElementById(courtCasePageNumberId);
-        elem.parentNode.removeChild(elem);
-    }
-
-    // Merge the court case and page number text into one text.
-    var mergedCourtCasePageNumberText = '{'+ relatedCourtCaseField.value + '[' + relatedCourtCaseNumField.value + ']'+'}';
-
-    // Get courtCasePageNumberBtns div id.
-    var courtCasePageNumberBtnsDiv = document.getElementById('courtCasePageNumberBtns');
-
-    // Create button element.
-    var button = document.createElement('button');
-
-    button.type = 'button';
-    button.className = 'btn btn-outline-primary';
-
-    // Id will be the relationName + 'Btn'.
-    // Ex.Selected IfElse => The button id is 'IfElseBtn'.
-    // It is case senstive and also will take in spaces.
-    button.id = mergedCourtCasePageNumberText + 'Btn';
-
-    // Add button id to global.
-    courtCasePageNumberId = button.id;
-
-    // Add text to be displayed on button.
-    button.innerHTML = mergedCourtCasePageNumberText;
-
-    // Add onClick event to add the selected relation to analysis text area at the cursor.
-    button.addEventListener('click', function (event) {
-        // Get current position of cursor at analysis text area.
-        // If no cursor, it will append at the end of the textArea's text.
-        var analysisTxtBox = document.getElementById('analysisTextArea');
-        let curPos = analysisTxtBox.selectionStart;
-
-        // Get current text in analysisTextArea.
-        var analysisTextAreaValue = $('#analysisTextArea').val();
-
-        // Insert text at cursor position.
-        $('#analysisTextArea').val(
-            analysisTextAreaValue.slice(0, curPos) + mergedCourtCasePageNumberText + analysisTextAreaValue.slice(curPos));
-
-        // Restore cursor position to end of analysis text area after clicking on button.
-        analysisTextArea.focus();
-    });
-
-    // Append the  button to annotation div.
-    courtCasePageNumberBtnsDiv.appendChild(button);
-}
-
 // Function to generate related sections button.
 // Will replace the existing buttons if any.
 // Cannot create if there are no selected related sections(disabled by UI).
@@ -321,7 +262,7 @@ function generateRelatedSectionsBtn() {
         button.type = 'button';
         button.className = 'btn btn-outline-secondary';
 
-        let mergedText = '{'+'Section ' + value + '}';
+        let mergedText = '{' + 'Section ' + value + '}';
 
         // Id will be the relationName + 'Btn'.
         // Ex.Selected IfElse => The button id is 'IfElseBtn'.
@@ -357,19 +298,6 @@ function generateRelatedSectionsBtn() {
     });
 }
 
-// Function to check if the the generate court case page number(CCPN) button is disabled.
-function checkDisabledCCPN() {
-    var relatedCourtCaseField = document.getElementById('relatedCourtCase');
-
-    if (relatedCourtCaseField.value == null || relatedCourtCaseField.value == ''
-        ) {
-        document.getElementById('generateCCPNBtn').disabled = true;
-    }
-    else {
-        document.getElementById('generateCCPNBtn').disabled = false;
-    }
-}
-
 // Function to check if the the generate related section(RS) button is disabled.
 function checkDisabledRS() {
     let selectedSectionOptions = $('#selectedSections').val().toString();
@@ -381,7 +309,6 @@ function checkDisabledRS() {
         document.getElementById('generateRSBtn').disabled = false;
     }
 }
-
 
 // function to get scenario based on id.
 function getLegalConcepts() {
@@ -412,4 +339,117 @@ function displayLegalConcepts(legalConcepts) {
                 '<td>' + value.other + '</td>\n' +
                 '</tr>');
     });
+}
+
+function addCourtCase() {
+    // get view element.
+    let courtCaseView = document.getElementById("courtCaseView");
+
+    // Increase court case global count.
+    currentCourtCaseCount++;
+
+    // Insert a new court case block into innerHTML of courtCaseView.
+    courtCaseView.innerHTML +=
+        /*('<option value="' + value.id + '">' + value.id + '</option>\n');*/
+        ('<div class="row" id="courtCase_' + currentCourtCaseCount + '" style="margin-bottom: 10px;">'
+            + '<div class="col-sm-2">'
+            + '<label class="col-form-label">#' + currentCourtCaseCount + '</label>'
+            + '</div>'
+            + '<div class="col-sm-4">'
+            + '<input type="text" class="form-control" id="relatedCourtCase_' + currentCourtCaseCount + '">'
+            + '</div>'
+            + '<div class="col-sm-4">'
+            + '<input type="text" class="form-control" id="courtCase_Num_' + currentCourtCaseCount + '">'
+            + '</div>'
+            + '<div class="col-sm-2">'
+            + '</div>'
+            + '</div>');
+}
+
+function removeCourtCase() {
+    // Do not allow remove if currentCourtCaseCount is 1.
+    // There must always be one court case available.
+    if (currentCourtCaseCount != 1) {
+        // Get court case id to remove based on global current court case count.
+        let courtCaseId = 'courtCase_' + currentCourtCaseCount;
+
+        // Remove target court case.
+        var elem = document.getElementById(courtCaseId);
+        elem.parentNode.removeChild(elem);
+
+        // Reduce gloval court case count.
+        currentCourtCaseCount--;
+    }
+}
+
+// Function to generate court case page number button.
+// Will replace the existing button if any.
+// Cannot create a court case page number button if the two affected fields are null or String empty('').
+function generateCourtCasePageNumberBtn() {
+    // remove existing court case page number button ids if not null.
+    if (courtCasePageNumberIds.length > 0) {
+        $.each(courtCasePageNumberIds, function (index, value) {
+            var elem = document.getElementById(value);
+            elem.parentNode.removeChild(elem);
+        });
+        courtCasePageNumberIds = [];
+    }
+
+    // Loop for the number of currentCourtCaseCount.
+    for (let i = 1; i <= currentCourtCaseCount; i++) {
+        let relatedCourtCase = 'relatedCourtCase_' + i;
+        let courtCaseNum = 'courtCase_Num_' + i;
+        // If either field is null, do not create button.
+        let relatedCourtCaseField = document.getElementById(relatedCourtCase);
+        if (relatedCourtCaseField.value == null || relatedCourtCaseField.value == '')
+            return;
+
+        let relatedCourtCaseNumField = document.getElementById(courtCaseNum);
+        if (relatedCourtCaseNumField.value == null || relatedCourtCaseField.value == '')
+            return;
+
+        // Merge the court case and page number text into one text.
+        let mergedCourtCasePageNumberText = '{' + relatedCourtCaseField.value + '[' + relatedCourtCaseNumField.value + ']' + '}';
+
+        // Get courtCasePageNumberBtns div id.
+        let courtCasePageNumberBtnsDiv = document.getElementById('courtCasePageNumberBtns');
+
+        // Create button element.
+        let button = document.createElement('button');
+
+        button.type = 'button';
+        button.className = 'btn btn-outline-primary';
+
+        // Id will be the relationName + 'Btn'.
+        // Ex.Selected IfElse => The button id is 'IfElseBtn'.
+        // It is case senstive and also will take in spaces.
+        button.id = mergedCourtCasePageNumberText + 'Btn';
+
+        // Add button id to global.
+        courtCasePageNumberIds.push(button.id);
+
+        // Add text to be displayed on button.
+        button.innerHTML = mergedCourtCasePageNumberText;
+
+        // Add onClick event to add the selected relation to analysis text area at the cursor.
+        button.addEventListener('click', function (event) {
+            // Get current position of cursor at analysis text area.
+            // If no cursor, it will append at the end of the textArea's text.
+            let analysisTxtBox = document.getElementById('analysisTextArea');
+            let curPos = analysisTxtBox.selectionStart;
+
+            // Get current text in analysisTextArea.
+            let analysisTextAreaValue = $('#analysisTextArea').val();
+
+            // Insert text at cursor position.
+            $('#analysisTextArea').val(
+                analysisTextAreaValue.slice(0, curPos) + mergedCourtCasePageNumberText + analysisTextAreaValue.slice(curPos));
+
+            // Restore cursor position to end of analysis text area after clicking on button.
+            analysisTextArea.focus();
+        });
+
+        // Append the  button to annotation div.
+        courtCasePageNumberBtnsDiv.appendChild(button);
+    }
 }

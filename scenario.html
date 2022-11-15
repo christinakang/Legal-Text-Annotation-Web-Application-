@@ -449,11 +449,13 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">IRAC Analysis</h5>
+                        <h3 class="card-title">IRAC Analysis</h3>
                         <!-- General Form Elements -->
                         <form>
                             <div class="row">
-                                <label for="inputText" class="col-sm-4 col-form-label">Issues</label>
+                                <div class="col-sm-4">
+                                    <label for="inputText" class="col-sm-4 col-form-label">Issues</label>
+                                </div>
                                 <div class="col-sm-8">
                                     <input id="issues" type="text" class="form-control">
                                 </div>
@@ -461,8 +463,8 @@
                             <br />
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Select related sections </label>
-                                <div class="col-sm-7">
+                                <label class="col-sm-4 col-form-label">Select related sections </label>
+                                <div class="col-sm-8">
                                     <select id="selectedSections" onchange="checkDisabledRS()" multiple="multiple">
                                         <option value="1.1">Section 1.1</option>
                                         <option value="1.2">Section 1.2</option>
@@ -767,8 +769,6 @@
                                         <option value="191a">Section 191a</option>
                                         <option value="191b">Section 191b</option>
                                     </select>
-                                </div>
-                                <div class="col-sm-2">
                                     <button type="button" id="generateRSBtn" class="btn btn-primary" value="Save data to file" onclick="generateRelatedSectionsBtn()" disabled>Update Sections</button>
                                 </div>
                             </div>
@@ -776,20 +776,49 @@
                             <!--Related court case and page number row-->
 
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="inputText2" class="col-form-label">Related court case</label>
-
-                                    <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="relatedCourtCase">
+                                <div class="col-sm-12">
+                                    <h4 class="card-title">Court cases</h4>
                                 </div>
-                                <div class="col-sm-4">
-                                    <label for="inputText2" class="col-form-label">Paragraph/Page number</label>
-
-                                    <input type="text" onkeyup="checkDisabledCCPN()" class="form-control" id="courtCase_Num">
+                                <div class="col-sm-12">
+                                    <button type="button" id="addCourtCaseBtn" class="btn btn-success" onclick="addCourtCase()">Add courtcase <span class="fas fa-plus"></span></button>
+                                    <button type="button" id="removeCourtCaseBtn" class="btn btn-danger" onclick="removeCourtCase()">Remove courtcase <span class="fas fa-trash"></span></button>
+                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" onclick="generateCourtCasePageNumberBtn()">Generate courtcase buttons</button>
                                 </div>
+                            </div>
+                            <br />
 
-                                <div class="col-md-2">
-                                    <label for="inputText2" class="col-form-label">Confirm Courtcase </label>
-                                    <button type="button" id="generateCCPNBtn" class="btn btn-primary" value="Save data to file" onclick="generateCourtCasePageNumberBtn()" disabled>Update Courtcase</button>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body" id="courtCaseView">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="col-form-label">No.</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="col-form-label">Related court case</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="col-form-label">Paragraph/Page number</label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+                                            </div>
+                                            <div class="row" id="courtCase_1" style="margin-bottom: 10px;">
+                                                <div class="col-sm-2">
+                                                    <label class="col-form-label">#1</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" id="relatedCourtCase_1">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" id="courtCase_Num_1">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <br />
@@ -801,7 +830,6 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">Highlight Texts and Tags</h5>
-
                                             <div class="col-sm-12 m-1" id="annotationBtns">
                                             </div>
                                         </div>
@@ -856,7 +884,6 @@
                                 </div>
                             </div>
                             <br />
-
                             <br />
 
                             <!--Add a button to save the data.-->
@@ -864,7 +891,6 @@
                                 <label class="col-sm-2 col-form-label">Export File</label>
                                 <button type="button" id="bt" class="btn btn-primary" value="Save data to file" onclick="saveFile()"> EXPORT </button>
                             </div>
-
                             <br />
                         </form>
                     </div>
