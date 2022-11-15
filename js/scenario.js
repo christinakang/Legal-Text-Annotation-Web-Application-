@@ -215,9 +215,6 @@ function saveFile() {
     file.click();
     file.remove();
     URL.revokeObjectURL(url);
-
-
-
 }
 
 function displayUser() {
