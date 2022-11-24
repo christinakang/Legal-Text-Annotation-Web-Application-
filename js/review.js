@@ -137,15 +137,15 @@
                 // Insert a new court case block into innerHTML of courtCaseView.
                 let newCourtCaseInput = document.createElement('span');
                 newCourtCaseInput.innerHTML =
-                    ('<div class="row" id="courtCase_' + courtCasesCount + '" style="margin-bottom: 10px;">'
+                    ('<div class="row" id="courtCase_' + i + '" style="margin-bottom: 10px;">'
                         + '<div class="col-sm-2">'
-                        + '<label class="col-form-label">#' + courtCasesCount + '</label>'
+                        + '<label class="col-form-label">#' + i + '</label>'
                         + '</div>'
                         + '<div class="col-sm-4">'
-                        + '<input type="text" class="form-control" id="relatedCourtCase_' + courtCasesCount + '">'
+                        + '<input type="text" class="form-control" id="relatedCourtCase_' + i + '">'
                         + '</div>'
                         + '<div class="col-sm-4">'
-                        + '<input type="text" class="form-control" id="courtCase_Num_' + courtCasesCount + '">'
+                        + '<input type="text" class="form-control" id="courtCase_Num_' + i + '">'
                         + '</div>'
                         + '<div class="col-sm-2">'
                         + '</div>'
