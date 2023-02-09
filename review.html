@@ -691,6 +691,7 @@
     // Get legal concepts.
 
     const legalConceptList = [];
+    var selectedRelations = [];
     var annotationBtnIds = [];
 
     $.each(legalConcepts, function (index, value) {
@@ -794,7 +795,9 @@
             var object2 = highlitedObject.find(obj => obj.id === target2);
             word2 = object2.target.selector[0].exact + '[' + object1.body[0].value + ']  ';
 
-            var finalRelation = ' { (' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ') } '
+            var finalRelation = ' {(' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ')} ';
+
+            selectedRelations.push(finalRelation);
 
             //console.log(finalRelation);
 
