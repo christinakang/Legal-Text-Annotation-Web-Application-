@@ -1,8 +1,6 @@
 ﻿window.addEventListener('DOMContentLoaded', function (e) {
     // Get file input
     const fileInput = document.querySelector('#usersFileData');
-    const output = document.querySelector('#output');
-    var data = [];
 
     // Event listeners
     fileInput.addEventListener('change', handleFiles);
@@ -106,8 +104,6 @@
 
         //add tags and relations
         let object = data_json.Original_Objects;
-        selectedAnnotation.push(object);
-        highlitedObject.push(object);
 
         // Set the annotations list.
         r.setAnnotations(object);
@@ -154,15 +150,30 @@
             }
         }
 
+        function splitLastOccurrence(str, substring) {
+            const lastIndex = str.lastIndexOf(substring);
+
+            const before = str.slice(0, lastIndex);
+
+            const after = str.slice(lastIndex + 1);
+
+            return [before, after];
+        }
+
         // Insert each value respectively.
         for (let i = 1; i <= courtCasesCount; i++) {
             let relatedCourtCase = 'relatedCourtCase_' + i;
             let courtCaseNum = 'courtCase_Num_' + i;
 
-            let tmp = JSON.stringify(courtCases[i - 1]).split('[');
+            let tmp = JSON.stringify(courtCases[i - 1]);
 
-            document.getElementById(relatedCourtCase).value = tmp[0].replace('"', '');
-            let num = tmp[1].replace('[', '');
+            let [courtCaseValue, courtCasePgNum] = splitLastOccurrence(tmp, '[');
+
+            // Set court case value.
+            document.getElementById(relatedCourtCase).value = courtCaseValue.replace('"', '');
+
+            // Set pg number value.
+            let num = courtCasePgNum.replace('[', '');
             num = num.replace(']', '');
             num = num.replace('"', '');
             document.getElementById(courtCaseNum).value = num;
@@ -181,27 +192,6 @@
         document.getElementById("conclusion").value = conclusion;
     }
 });
-/*
-//if your csv file contains the column names as the first line
-function processDataAsObj(csv){
-    var allTextLines = csv.split(/\r\n|\n/);
-    var lines = [];
-
-    //first line of csv
-    var keys = allTextLines.shift().split(',');
-
-    while (allTextLines.length) {
-        var arr = allTextLines.shift().split(',');
-        var obj = {};
-        for(var i = 0; i < keys.length; i++){
-            obj[keys[i]] = arr[i];
-    }
-        lines.push(obj);
-    }
-        console.log(lines);
-    drawOutputAsObj(lines);
-}
-*/
 
 // Change the scenario text based on retrieved scenario text from db.
 function changeScenarioText(scenario) {
@@ -211,7 +201,7 @@ function changeScenarioText(scenario) {
 
 function updateAnnotationButtons(annotations) {
     $.each(annotations, function (index, annotation) {
-        highlitedObject.push(annotation);
+        highlightedObject.push(annotation);
 
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
@@ -267,10 +257,10 @@ function updateAnnotationButtons(annotations) {
             var target1 = annotation.target[0].id;
             var target2 = annotation.target[1].id;
 
-            var object1 = highlitedObject.find(obj => obj.id === target1);
+            var object1 = highlightedObject.find(obj => obj.id === target1);
             word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + ']';
 
-            var object2 = highlitedObject.find(obj => obj.id === target2);
+            var object2 = highlightedObject.find(obj => obj.id === target2);
             word2 = object2.target.selector[0].exact + '[' + object2.body[0].value + ']';
 
             var finalRelation = ' {(' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ')} ';

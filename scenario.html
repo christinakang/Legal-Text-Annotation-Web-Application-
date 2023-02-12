@@ -916,7 +916,7 @@
 <script type="text/javascript">
     var selectedAnnotation = [];
     var selectedRelations = [];
-    var highlitedObject = [];
+    var highlightedObject = [];
 </script>
 <script type="text/javascript">
 
@@ -930,6 +930,7 @@
     // Get legal concepts.
 
     const legalConceptList = [];
+    var selectedRelations = [];
     var annotationBtnIds = [];
 
     $.each(legalConcepts, function (index, value) {
@@ -970,7 +971,7 @@
     r.on('createAnnotation', function (annotation) {
         // Log highlighted text as new annotation for debugging purposes.
         console.log('annotation object created', annotation);
-        highlitedObject.push(annotation);
+        highlightedObject.push(annotation);
 
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
@@ -1027,10 +1028,10 @@
             var target1 = annotation.target[0].id;
             var target2 = annotation.target[1].id;
 
-            var object1 = highlitedObject.find(obj => obj.id === target1);
+            var object1 = highlightedObject.find(obj => obj.id === target1);
             word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + ']';
 
-            var object2 = highlitedObject.find(obj => obj.id === target2);
+            var object2 = highlightedObject.find(obj => obj.id === target2);
             word2 = object2.target.selector[0].exact + '[' + object2.body[0].value + ']';
 
             var finalRelation = ' {(' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ')} ';
@@ -1107,10 +1108,10 @@
             let target1 = annotation.target[0].id;
             let target2 = annotation.target[1].id;
 
-            let object1 = highlitedObject.find(obj => obj.id === target1);
+            let object1 = highlightedObject.find(obj => obj.id === target1);
             word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + ']';
 
-            let object2 = highlitedObject.find(obj => obj.id === target2);
+            let object2 = highlightedObject.find(obj => obj.id === target2);
             word2 = object2.target.selector[0].exact + '[' + object2.body[0].value + ']';
 
             let buttonId = ' {(' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ')} ' + 'Btn';

@@ -677,7 +677,8 @@
 <!--Script to handle annotation of scenarios and auto button creation for highlighted text.-->
 <script type="text/javascript">
     var selectedAnnotation = [];
-    var highlitedObject = [];
+    var selectedRelations = [];
+    var highlightedObject = [];
 </script>
 <script type="text/javascript">
 
@@ -732,7 +733,7 @@
     r.on('createAnnotation', function (annotation) {
         // Log highlighted text as new annotation for debugging purposes.
         console.log('annotation object created', annotation);
-        highlitedObject.push(annotation);
+        highlightedObject.push(annotation);
 
         if (annotation.motivation == null && annotation.motivation != 'linking') {
             selectedAnnotation.push({ selectedText: annotation.target.selector[0].exact, selectedTag: annotation.body[0].value });
@@ -789,10 +790,10 @@
             var target1 = annotation.target[0].id;
             var target2 = annotation.target[1].id;
 
-            var object1 = highlitedObject.find(obj => obj.id === target1);
+            var object1 = highlightedObject.find(obj => obj.id === target1);
             word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + '] ';
 
-            var object2 = highlitedObject.find(obj => obj.id === target2);
+            var object2 = highlightedObject.find(obj => obj.id === target2);
             word2 = object2.target.selector[0].exact + '[' + object1.body[0].value + ']  ';
 
             var finalRelation = ' {(' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ')} ';
@@ -843,6 +844,48 @@
             // Append the  button to annotation div.
             annotationBtnDiv.appendChild(button);
         };
+    });
+
+    // On delete annotation,
+    // Remove button from view and annotationBtnIds.
+    r.on('deleteAnnotation', function (annotation) {
+        console.log('annotation object deleted', annotation);
+
+        // If its non linking annotation.
+        if (annotation.motivation == null && annotation.motivation != 'linking') {
+            // Remove button from view.
+            let buttonId = '{' + annotation.target.selector[0].exact + '[' + annotation.body[0].value + ']}' + 'Btn';
+            let elem = document.getElementById(buttonId);
+            elem.parentNode.removeChild(elem);
+
+            // Remove buttonId(single occurance only) from annotationBtnIds list.
+            let index = annotationBtnIds.indexOf(buttonId);
+            if (index > -1) {
+                annotationBtnIds.splice(index, 1);
+            }
+        }
+        // If its linking annotation.
+        else {
+            let relation = annotation.body[0].value;
+            let target1 = annotation.target[0].id;
+            let target2 = annotation.target[1].id;
+
+            let object1 = highlightedObject.find(obj => obj.id === target1);
+            word1 = object1.target.selector[0].exact + '[' + object1.body[0].value + ']';
+
+            let object2 = highlightedObject.find(obj => obj.id === target2);
+            word2 = object2.target.selector[0].exact + '[' + object2.body[0].value + ']';
+
+            let buttonId = ' {(' + word1 + ')' + ' (' + relation + ') ' + '(' + word2 + ')} ' + 'Btn';
+            let elem = document.getElementById(buttonId);
+            elem.parentNode.removeChild(elem);
+
+            // Remove buttonId(single occurance only) from annotationBtnIds list.
+            let index = annotationBtnIds.indexOf(buttonId);
+            if (index > -1) {
+                annotationBtnIds.splice(index, 1);
+            }
+        }
     });
 </script>
 

@@ -5,9 +5,9 @@ const scenarioList = [
     { id: 2, text: "Alan needed money quickly. He owned an original 1886 edition of Kidnapped by Robert Louis Stevenson, a book which he advertised in the newspaper for sale for $1000. Cate saw the advertisement.She telephoned Alan, saying that she would buy the book for $1000. Alan, however, replied that he had reconsidered the matter and that he could not sell the book for less than $2000.Cate replied that she would give him $1500. Alan replied that he would only sell the book for $2000 but that he would keep his offer open for seven days.He also said that Cate could fax her acceptance to him if she wanted.The next day Alan sold the book to his friend David because David loved the book so much and because he paid $7000 for it. Two days later Cate decided to purchase the book for Alan's price of $2000.She posted her acceptance to Alan.The next day David told Cate that he had bought a copy of Kidnapped from Alan for $7, 000. Cate rang Alan to confirm that she had accepted his offer.Later that day Alan received Cate's acceptance." },
     {
         id: 3, text: "Ellie's Montblanc pen with her name engraved on it was stolen. She puts an advertisement on her personal blog advertising a reward of RM1,000 to anyone who finds it. Frank, who has not seen the advertisement, discovers the pen in a library locker and takes it home. His course mate, Galvin, on seeing the pen, recognizes it as the one for which the reward has been offered, and shows Frank the advertisement in Ellie's blog. Frank returns the pen to Ellie, but she refuses to pay RM 1,000, saying that the offer has been withdrawn. Frank knows that Galvin has been keen to buy his vintage Vespa scooter.On Sunday he tells Galvin that he has decided to sell at RM 5, 000.Galvin says that he is very interested but would like to think about it.Frank says 'I will assume that you want it, unless you tell me otherwise by Friday'.On Thursday, Galvin meets Hassan who tells him that Frank has just agreed to sell the scooter to Jaya for RM6, 000.Galvin immediately texted Frank accepting his offer.Later that day, however, Galvin changes his mind and calls on Frank to tell him to ignore the text message.Frank tells him that his deal with Jaya has fallen through, and he is still keen to sell it to Galvin."
-    },{
+    }, {
         id: 4, text: "Andrew used to work for Peter. His job primarily consisted of collecting debts from Peter’s clients. One of Peter’s clients, Trevor, who did not know that Andrew had been dismissed, paid Andrew RM 200 which he owed Peter. Andrew disappeared with the money. Peter wants to know whether he can compel Trevor to pay him again."
-    },{
+    }, {
         id: 5, text: "Sam, the Accountant of XYZ Bhd, often acted as the Acting Manager of the company while the Managing Director and other senior staff were absent. His normal duties when in such a position involved overseeing internal company matters and ensuring that his own Accounting Department operated well. While acting as Acting Manager, Sam purchased land at auction from TP on behalf of the company for RM 1 million."
     }, {
         id: 6, text: "Jennifer is a young and very talented squash player. She is sixteen years old and in February 2016, she entered into an agreement in Malaysia with Lawrence (who is a prominent coach) whereby he undertook to train her and also decides which tournament she should play in. In return, Jennifer agreed to follow Lawrence's instructions and to pay him 25% of her winnings from all future tournaments for 2 years. In August 2017, Jennifer disobeyed Lavwrence's instruction to play in European open whereby the total prize money was US 1.2 million and instead prefers to defend her title in the Malaysian open tournament, where the total prize money was only RM350, 000."
@@ -207,7 +207,6 @@ function createReasonButtons() {
 
 function saveFile() {
     // Get the data from each element on the form.
-    var selectText_Tags = highlitedObject;
     var Username = document.getElementById('userDisplay');
     var scenarioID = document.getElementById('scenarioSelect');
     var issues = document.getElementById('issues');
@@ -238,7 +237,7 @@ function saveFile() {
         "RelatedCourtCase_pageNumList": relatedCourtCasePageNumbers,
         "Analysis": analysis.value,
         "Conclusion": conclusion.value,
-        "Original_Objects": highlitedObject
+        "Original_Objects": highlightedObject
     };
 
     var data = JSON.stringify(data_json);
@@ -491,7 +490,6 @@ function generateCourtCasePageNumberBtn() {
         courtCasePageNumberBtnsDiv.appendChild(button);
     }
 }
-
 
 function getLegalConcepts() {
     // remove all table rows except the first(header).
