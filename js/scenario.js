@@ -210,6 +210,7 @@ function saveFile() {
     var Username = document.getElementById('userDisplay');
     var scenarioID = document.getElementById('scenarioSelect');
     var issues = document.getElementById('issues');
+    var decomQues = document.getElementById('decompositions');
     var analysis = document.getElementById('analysisTextArea');
     var conclusion = document.getElementById('conclusion');
     var selectedSectionOptions = $('#selectedSections').val();
@@ -233,6 +234,7 @@ function saveFile() {
         "Text_Tags": selectedAnnotation,
         "Selected_Relations": selectedRelations,
         "Issues": issues.value,
+        "DecomQues":decomQues.value,
         "Sections": selectedSectionOptions,
         "RelatedCourtCase_pageNumList": relatedCourtCasePageNumbers,
         "Analysis": analysis.value,

@@ -114,6 +114,9 @@
         let issues = data_json.Issues;
         document.getElementById("issues").value = issues;
 
+        let decomQues = data_json.DecomQues;
+        document.getElementById("decompositions").value = decomQues;
+
         let sections = data_json.Sections;
         console.log(sections);
         restoreRelatedSectionsBtn(sections);
