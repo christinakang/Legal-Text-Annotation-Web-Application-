@@ -95,8 +95,8 @@
 
         let scenarioID = data_json.ScenarioID;
         //console.log(data_json.ScenarioID);
-        $.each(scenarioList, function (index, value) {
-            if (value.id == scenarioID) {
+        $.each(sceList, function (index, value) {
+            if (value.ID == scenarioID) {
                 changeScenarioText(value);
             }
         });
@@ -199,7 +199,7 @@
 // Change the scenario text based on retrieved scenario text from db.
 function changeScenarioText(scenario) {
     var scenarioText = document.getElementById("ScenarioText");
-    scenarioText.innerHTML = scenario.text;
+    scenarioText.innerHTML = scenario.Scenario;
 }
 
 function updateAnnotationButtons(annotations) {
