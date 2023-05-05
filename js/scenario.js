@@ -35,6 +35,8 @@ function getSceData(){
    console.log("scelist ",sceList);
 }
 
+
+
 // The the list of scenarios available in the database.
 function getScenarioList() {
     // get all declared scenarios.
@@ -43,7 +45,7 @@ function getScenarioList() {
     console.log(sceList);
 
     $.each(sceList, function (index, value) {
-        console.log("valud ID ",value.ID);
+        //console.log("valud ID ",value.ID);
         scenarioSelect.innerHTML +=
             ('<option value="' + value.ID + '">' + value.ID + '</option>\n');
 
@@ -56,6 +58,7 @@ function getScenarioList() {
 function getScenario() {
     const scenarioSelect = document.getElementById('scenarioSelect');
 
+
     let selectedId = scenarioSelect.value;
 
     if (selectedId == 0) {
@@ -67,6 +70,7 @@ function getScenario() {
     $.each(sceList, function (index, value) {
         if (value.ID == selectedId) {
             changeScenarioText(value);
+
         }
     });
 
@@ -80,9 +84,16 @@ function getScenario() {
 
 // Change the scenario text based on retrieved scenario text from db.
 function changeScenarioText(scenario) {
+    console.log("scenario var ",scenario.Issue);
     var scenarioText = document.getElementById("ScenarioText");
     scenarioText.innerHTML = scenario.Scenario;
+
+    //update other fileds
+    document.getElementById("issues").value = scenario.Issue;
+    document.getElementById("decompositions").value = scenario.DecomQ;
+
 }
+
 
 function createRelationButtons() {
     // Const relation.
