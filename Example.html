@@ -34,8 +34,8 @@
     <link href="css/recogito.min.css" rel="stylesheet">
 
     <!-- Functions-->
-    <script type="text/javascript" src="js/scenario.js"></script>
     <script type="text/javascript" src="js/recogito.min.js"></script>
+    <script type="text/javascript" src="js/reviewDisplay.js"></script>
 
     <!-- Multiselect Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -46,7 +46,7 @@
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
 
-    <title>Annotation</title>
+    <title>Example</title>
 </head>
 
 <body id="page-top" onload=init()>
@@ -88,7 +88,6 @@
                     <span>Review</span>
                 </a>
             </li>
-
 
              <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -154,45 +153,15 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800"> Annotation </h1>
+                    <h1 class="h3 mb-4 text-gray-800">Example of annotation </h1>
 
-                    <p>
-                        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Legal Concepts</a>
-                    </p>
-                    <div class="row">
-                        <div class="col">
-                            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Legal Concept</th>
-                                                <th>Related topic</th>
-                                                <th>Related section</th>
-                                                <th>Other</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card shadow mb-4">
-                    </div>
-                    <!-- Basic Card Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Scenario Select </h6>
-                        </div>
 
                         <div class="card-header py-3">
                             <select id="scenarioSelect" onchange="getScenario()" class="form-select" aria-label="Default select example">
                                 <option value="0" selected>Select scenario</option>
                             </select>
                         </div>
-                    </div>
+
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div>
