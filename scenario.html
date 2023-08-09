@@ -873,6 +873,15 @@
             if (index > -1) {
                 annotationBtnIds.splice(index, 1);
             }
+
+            selectedAnnotation = selectedAnnotation.filter(function(item){
+                return item.selectedText != annotation.target.selector[0].exact && item.selectedTag != annotation.body[0].value;
+            });
+
+            highlightedObject = highlightedObject.filter(function(item){
+                return item.target.selector[0].exact != annotation.target.selector[0].exact && item.body[0].value != annotation.body[0].value;
+            });
+
         }
         // If its linking annotation.
         else {
@@ -895,6 +904,14 @@
             if (index > -1) {
                 annotationBtnIds.splice(index, 1);
             }
+
+            selectedAnnotation = selectedAnnotation.filter(function(item){
+                return item.selectedText != annotation.target.selector[0].exact && item.selectedTag != annotation.body[0].value;
+            });
+
+            highlightedObject = highlightedObject.filter(function(item){
+                return item.target.selector[0].exact != annotation.target.selector[0].exact && item.body[0].value != annotation.body[0].value;
+            });
         }
     });
 </script>
