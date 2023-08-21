@@ -61,10 +61,10 @@
     <link href="css/recogito.min.css" rel="stylesheet">
 
     <!-- Functions-->
-    <script type="text/javascript" src="js/scenario.js"></script>
+    <script type="text/javascript" src="js/index_book.js"></script>
     <script type="text/javascript" src="js/recogito.min.js"></script>
 
-    <!-- Multiselect Bootstrap -->
+     <!-- Multiselect Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
     <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -196,6 +196,32 @@
                 <!-- End of Topbar -->
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
+ <p>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Index of chapter 4,5,6,7. </a>
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="legalConceptTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>primary</th>
+                                                <th>secondary</th>
+                                                <th>tertiary</th>
+                                                <th>combine_text</th>
+                                                <th>paragraphs</th>
+
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 <div class="container-fluid">
 
 
@@ -2872,5 +2898,20 @@
         <i class="fas fa-angle-up"></i>
     </a>
 </body>
+
+
 </html>
+
+<!--Script to initialize multiselect for sections.-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#selectedSections').multiselect({
+            enableFiltering: true,
+            maxHeight: 400,
+            dropUp: true,
+            buttonWidth: '400px'
+        });
+    });
+</script>
 
